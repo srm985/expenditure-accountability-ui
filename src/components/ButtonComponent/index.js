@@ -17,6 +17,7 @@ import './styles.scss';
 const ButtonComponent = (props) => {
     const {
         className,
+        handleClick,
         href,
         label,
         styleType,
@@ -41,6 +42,7 @@ const ButtonComponent = (props) => {
         <a
             className={buttonClassNames}
             href={href}
+            onClick={handleClick}
         >
             {buttonLabel}
         </a>
@@ -57,6 +59,7 @@ const ButtonComponent = (props) => {
                         // eslint-disable-next-line react/button-has-type
                         <button
                             className={buttonClassNames}
+                            onClick={handleClick}
                             type={type}
                         >
                             {buttonLabel}
@@ -69,6 +72,7 @@ const ButtonComponent = (props) => {
 
 ButtonComponent.propTypes = {
     className: PropTypes.string,
+    handleClick: PropTypes.func,
     href: PropTypes.string,
     label: PropTypes.string,
     styleType: PropTypes.oneOf(BUTTON_STYLE_TYPES),
@@ -77,6 +81,7 @@ ButtonComponent.propTypes = {
 
 ButtonComponent.defaultProps = {
     className: '',
+    handleClick: () => { },
     href: '',
     label: '',
     styleType: BUTTON_STYLE_TYPE_PRIMARY,

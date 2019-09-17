@@ -24,7 +24,8 @@ export const makeCall = (parameters) => new Promise((resolve, reject) => {
     const body = payload ? JSON.stringify(payload) : undefined;
 
     console.log({
-        parameters
+        parameters,
+        token
     });
 
     fetch(URL, {

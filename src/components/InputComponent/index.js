@@ -10,6 +10,8 @@ import './styles.scss';
 
 const InputComponent = (props) => {
     const {
+        handleChange,
+        name,
         placeholder,
         type
     } = props;
@@ -17,6 +19,8 @@ const InputComponent = (props) => {
     return (
         <input
             className={InputComponent.displayName}
+            name={name}
+            onChange={handleChange}
             placeholder={placeholder}
             type={type}
         />
@@ -26,11 +30,14 @@ const InputComponent = (props) => {
 InputComponent.displayName = 'InputComponent';
 
 InputComponent.propTypes = {
+    handleChange: PropTypes.func,
+    name: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
     type: PropTypes.oneOf(INPUT_TYPES)
 };
 
 InputComponent.defaultProps = {
+    handleChange: () => { },
     placeholder: '',
     type: INPUT_TYPE_TEXT
 };
