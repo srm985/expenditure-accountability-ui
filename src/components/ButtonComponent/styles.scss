@@ -1,3 +1,5 @@
+@import '../../styles/constants';
+
 .ButtonComponent {
     cursor: pointer;
 
@@ -7,6 +9,10 @@
         margin: 0;
         padding: 0;
 
+        text-decoration: underline;
+
+        color: $color-blue;
+        outline: none;
         background-color: transparent;
     }
 }

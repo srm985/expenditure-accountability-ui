@@ -4,9 +4,12 @@
     "url": "https://github.com/srm985/expenditure-accountability-ui/issues"
   },
   "dependencies": {
+    "moment": "^2.24.0",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "react-dom": "^16.9.0",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1"
   },
   "description": "Application for tracking finances.",
   "devDependencies": {

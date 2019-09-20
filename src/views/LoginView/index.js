@@ -1,8 +1,11 @@
 import React from 'react';
-
 import {
-    CALL_TYPE_POST,
-    makeCall
+    Redirect
+} from 'react-router-dom';
+
+import authentication from '../../utils/authentication';
+import makeCall, {
+    CALL_TYPE_POST
 } from '../../utils/restful';
 
 import {
@@ -12,18 +15,21 @@ import {
 import Button from '../../components/ButtonComponent';
 import Input from '../../components/InputComponent';
 
-import {
-    LOCAL_STORAGE_TOKEN
-} from '../../constants';
-
 class LoginView extends React.PureComponent {
     constructor(props) {
         super(props);
 
         this.state = {
+            isAuthenticated: false,
             password: '',
             user: ''
         };
+    }
+
+    componentDidMount() {
+        this.setState({
+            isAuthenticated: authentication.verify()
+        });
     }
 
     handleChange = (event) => {
@@ -59,7 +65,14 @@ class LoginView extends React.PureComponent {
                 token
             } = response;
 
-            window.localStorage.setItem(LOCAL_STORAGE_TOKEN, token);
+            // If we receive a valid token, store it.
+            if (token) {
+                authentication.authenticate(token);
+
+                this.setState({
+                    isAuthenticated: true
+                });
+            }
         }).catch((response) => {
             console.log('error:', response);
         });
@@ -80,33 +93,44 @@ class LoginView extends React.PureComponent {
 
     render() {
         const {
+            isAuthenticated,
             password,
             user
         } = this.state;
 
         return (
             <>
-                <form onSubmit={this.handleSubmit}>
-                    <Input
-                        handleChange={this.handleChange}
-                        name={'user'}
-                        value={user}
-                    />
-                    <Input
-                        handleChange={this.handleChange}
-                        name={'password'}
-                        value={password}
-                    />
-                    <Button
-                        label={'Log In'}
-                        type={BUTTON_TYPE_SUBMIT}
-                    />
-                </form>
-                <Button
-                    handleClick={this.test}
-                    label={'test auth'}
-                    type={'button'}
-                />
+                {
+                    isAuthenticated
+                        ? (
+                            <Redirect to={'/dashboard'} />
+                        )
+                        : (
+                            <>
+                                <form onSubmit={this.handleSubmit}>
+                                    <Input
+                                        handleChange={this.handleChange}
+                                        name={'user'}
+                                        value={user}
+                                    />
+                                    <Input
+                                        handleChange={this.handleChange}
+                                        name={'password'}
+                                        value={password}
+                                    />
+                                    <Button
+                                        label={'Log In'}
+                                        type={BUTTON_TYPE_SUBMIT}
+                                    />
+                                </form>
+                                <Button
+                                    handleClick={this.test}
+                                    label={'test auth'}
+                                    type={'button'}
+                                />
+                            </>
+                        )
+                }
             </>
         );
     }

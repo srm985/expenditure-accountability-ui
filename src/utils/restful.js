@@ -1,20 +1,16 @@
-import {
-    LOCAL_STORAGE_TOKEN
-} from '../constants';
+import authentication from './authentication';
 
 export const CALL_TYPE_POST = 'POST';
 export const CALL_TYPE_GET = 'GET';
 
-const fetchToken = () => window.localStorage.getItem(LOCAL_STORAGE_TOKEN);
-
-export const makeCall = (parameters) => new Promise((resolve, reject) => {
+const makeCall = (parameters) => new Promise((resolve, reject) => {
     const {
         payload,
         method,
         URL
     } = parameters;
 
-    const token = fetchToken();
+    const token = authentication.retrieve();
 
     const headers = new Headers({
         'Authorization': token ? `Bearer ${token}` : undefined,
@@ -22,11 +18,6 @@ export const makeCall = (parameters) => new Promise((resolve, reject) => {
     });
 
     const body = payload ? JSON.stringify(payload) : undefined;
-
-    console.log({
-        parameters,
-        token
-    });
 
     fetch(URL, {
         body,
@@ -46,3 +37,5 @@ export const makeCall = (parameters) => new Promise((resolve, reject) => {
         reject(response);
     });
 });
+
+export default makeCall;

@@ -1,4 +1,8 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+import {
+    withRouter
+} from 'react-router-dom';
 
 import Button from '../ButtonComponent';
 
@@ -6,6 +10,7 @@ import {
     BUTTON_STYLE_TYPE_INLINE
 } from '../ButtonComponent/config';
 
+import authentication from '../../utils/authentication';
 import classNames from '../../utils/classNames';
 
 import './styles.scss';
@@ -44,6 +49,18 @@ class HeaderComponent extends React.PureComponent {
         });
     }
 
+    handleLogout = () => {
+        const {
+            props: {
+                history
+            }
+        } = this;
+
+        authentication.clear();
+
+        history.push('/');
+    }
+
     render() {
         const {
             hasScrolled
@@ -62,29 +79,15 @@ class HeaderComponent extends React.PureComponent {
 
         return (
             <header className={componentClassNames}>
-                <span className={`${displayName}__logo`}>Sean McQuay</span>
+                <span className={`${displayName}__logo`}>
+                    {'ExpenditureAccountability'}
+                </span>
                 <ul className={`${displayName}__navigation`}>
                     <li>
                         <Button
                             className={`${displayName}__navigation-link`}
-                            href={'/'}
-                            label={'About'}
-                            styleType={BUTTON_STYLE_TYPE_INLINE}
-                        />
-                    </li>
-                    <li>
-                        <Button
-                            className={`${displayName}__navigation-link`}
-                            href={'/'}
-                            label={'Work'}
-                            styleType={BUTTON_STYLE_TYPE_INLINE}
-                        />
-                    </li>
-                    <li>
-                        <Button
-                            className={`${displayName}__navigation-link`}
-                            href={'/'}
-                            label={'Contact'}
+                            handleClick={this.handleLogout}
+                            label={'Logout'}
                             styleType={BUTTON_STYLE_TYPE_INLINE}
                         />
                     </li>
@@ -96,4 +99,14 @@ class HeaderComponent extends React.PureComponent {
 
 HeaderComponent.displayName = 'HeaderComponent';
 
-export default HeaderComponent;
+HeaderComponent.propTypes = {
+    history: PropTypes.shape({
+        push: PropTypes.func
+    })
+};
+
+HeaderComponent.defaultProps = {
+    history: {}
+};
+
+export default withRouter(HeaderComponent);

@@ -1,0 +1,12 @@
+@import '../../styles/constants';
+
+.TableRowComponent {
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    border-top: solid 1px $color-gray-dark;
+
+    &__cell {
+        padding-right: 10px;
+    }
+}

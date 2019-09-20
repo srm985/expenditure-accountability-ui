@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Login from './views/LoginView';
+import App from './app';
 
 ReactDOM.render(
-    <Login />,
+    <App />,
     document.getElementById('app')
 );
 
