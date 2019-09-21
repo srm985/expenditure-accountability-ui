@@ -4,37 +4,15 @@
     margin: 0;
     padding: 0;
 
-    tr {
-        display: flex;
-        align-items: center;
+    list-style: none;
 
-        box-sizing: border-box;
-        padding-right: 10px;
-        padding-left: 10px;
-
-        & > th
-        ,
-        & > td {
-            width: 22.5%;
-            padding: 0;
-
-            text-align: left;
-        }
-
-        & > td {
-            width: 22.5%;
-        }
+    &__header {
+        padding: 0 10px;
     }
 
-    tbody {
-        & > tr {
-            display: flex;
+    &__header-column {
+        display: inline-block;
 
-            button {
-                flex: 1;
-
-                justify-self: center;
-            }
-        }
+        width: 22.5%;
     }
 }

@@ -16,9 +16,12 @@ const TableComponent = (props) => {
     } = TableComponent;
 
     const tableHeaders = tableHeaderList.map((tableHeader) => (
-        <th key={tableHeader}>
+        <span
+            className={`${displayName}__header-column`}
+            key={tableHeader}
+        >
             {tableHeader}
-        </th>
+        </span>
     ));
 
     const tableRows = tableDataList.map((tableRow) => {
@@ -36,14 +39,12 @@ const TableComponent = (props) => {
     });
 
     return (
-        <table className={displayName}>
-            <thead className={`${displayName}__header`}>
-                <tr>{tableHeaders}</tr>
-            </thead>
-            <tbody className={`${displayName}__body`}>
-                {tableRows}
-            </tbody>
-        </table>
+        <ul className={displayName}>
+            <li className={`${displayName}__header`}>
+                {tableHeaders}
+            </li>
+            {tableRows}
+        </ul>
     );
 };
 

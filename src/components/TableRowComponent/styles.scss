@@ -1,12 +1,28 @@
 @import '../../styles/constants';
 
 .TableRowComponent {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    display: flex;
+    align-items: center;
+
+    box-sizing: border-box;
+    height: 40px;
+    padding: 0 10px;
 
     border-top: solid 1px $color-gray-dark;
 
     &__cell {
+        box-sizing: border-box;
+        width: 22.5%;
         padding-right: 10px;
+
+        input {
+            width: 100%;
+        }
+    }
+
+    &__edit-button {
+        flex: 1;
+
+        justify-self: center;
     }
 }

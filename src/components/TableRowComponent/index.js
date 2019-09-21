@@ -69,9 +69,9 @@ class TableRowComponent extends React.Component {
             } = clonedRowData;
 
             return (
-                <td
+                <span
                     className={`${displayName}__cell`}
-                    key={cellValue}
+                    key={cellName}
                 >
                     {
                         isEditing
@@ -88,21 +88,21 @@ class TableRowComponent extends React.Component {
                                 </span>
                             )
                     }
-                </td>
+                </span>
             );
         });
 
         return (
-            <tr className={displayName}>
+            <li className={displayName}>
                 {cells}
                 <Button
-                    className={`${displayName}__edit`}
+                    className={`${displayName}__edit-button`}
                     handleClick={this.handleToggleEdit}
                     label={buttonLabel}
                     styleType={BUTTON_STYLE_TYPE_INLINE}
                     type={BUTTON_TYPE_BUTTON}
                 />
-            </tr>
+            </li>
         );
     }
 }

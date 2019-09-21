@@ -1,54 +1,29 @@
 import React from 'react';
+import moment from 'moment';
 
+import Button from '../../components/ButtonComponent';
 import Grid from '../../components/GridComponent';
 import GridItem from '../../components/GridItemComponent';
 import Header from '../../components/HeaderComponent';
+import Input from '../../components/InputComponent';
 import TableComponent from '../../components/TableComponent';
+
+import {
+    BUTTON_STYLE_TYPE_INLINE,
+    BUTTON_TYPE_SUBMIT
+} from '../../components/ButtonComponent/config';
+import {
+    INPUT_TYPE_DATE,
+    INPUT_TYPE_TEL
+} from '../../components/InputComponent/config';
 
 import classNames from '../../utils/classNames';
 import makeCall, {
-    CALL_TYPE_GET
+    CALL_TYPE_GET,
+    CALL_TYPE_PUT
 } from '../../utils/restful';
 
 import './styles.scss';
-
-const MOCKED_TABLE_DATA = [
-    {
-        date: '2019-05-07',
-        groceryExpense: 100,
-        personalExpense: 123,
-        sharedExpense: 5678,
-        transactionID: Math.random().toString()
-    },
-    {
-        date: '2019-05-07',
-        groceryExpense: 100,
-        personalExpense: 123,
-        sharedExpense: 5678,
-        transactionID: Math.random().toString()
-    },
-    {
-        date: '2019-05-07',
-        groceryExpense: 100,
-        personalExpense: 123,
-        sharedExpense: 5678,
-        transactionID: Math.random().toString()
-    },
-    {
-        date: '2019-05-07',
-        groceryExpense: 100,
-        personalExpense: 123,
-        sharedExpense: 5678,
-        transactionID: Math.random().toString()
-    },
-    {
-        date: '2019-05-07',
-        groceryExpense: 100,
-        personalExpense: 123,
-        sharedExpense: 5678,
-        transactionID: Math.random().toString()
-    }
-];
 
 class DashboardView extends React.Component {
     constructor(props) {
@@ -66,7 +41,29 @@ class DashboardView extends React.Component {
     }
 
     formatEnteredTransactions = (enteredTransactions) => {
+        const formattedTransactions = enteredTransactions.map((transaction) => {
+            const {
+                date,
+                groceryExpense,
+                personalExpense,
+                sharedExpense,
+                transactionID
+            } = transaction;
 
+            /* eslint-disable sort-keys */
+            return ({
+                transactionID,
+                date: moment(date).format('DD MMM YYYY'),
+                personalExpense: `$${personalExpense}`,
+                sharedExpense: `$${sharedExpense}`,
+                groceryExpense: `$${groceryExpense}`
+            });
+            /* eslint-enable sort-keys */
+        });
+
+        this.setState({
+            enteredTransactions: formattedTransactions
+        });
     }
 
     retrieveEnteredTransactions = () => {
@@ -77,11 +74,23 @@ class DashboardView extends React.Component {
             console.log({
                 response
             });
-            this.setState({
-                enteredTransactions: response
-            });
+
+            this.formatEnteredTransactions(response);
         }).catch(() => {
             // No action required.
+        });
+    }
+
+    handleChange = (event) => {
+        const {
+            target: {
+                name,
+                value
+            }
+        } = event;
+
+        this.setState({
+            [name]: value
         });
     }
 
@@ -89,6 +98,70 @@ class DashboardView extends React.Component {
         this.setState({
             currentTab: selectedTabNumber
         });
+    }
+
+    renderAddEntry = () => {
+        const {
+            state: {
+                date,
+                groceryExpense,
+                personalExpense,
+                sharedExpense
+            }
+        } = this;
+
+        const handleSubmitEntry = (event) => {
+            event.preventDefault();
+
+            makeCall({
+                method: CALL_TYPE_PUT,
+                payload: {
+                    date,
+                    groceryExpense,
+                    personalExpense,
+                    sharedExpense
+                },
+                URL: 'http://localhost:3100/api/add-transaction'
+            }).then(() => {
+                this.retrieveEnteredTransactions();
+            }).catch(() => {
+                // No action needed.
+            });
+        };
+
+        return (
+            <form onSubmit={handleSubmitEntry}>
+                <Input
+                    handleChange={this.handleChange}
+                    name={'date'}
+                    placeholder={'date'}
+                    type={INPUT_TYPE_DATE}
+                />
+                <Input
+                    handleChange={this.handleChange}
+                    name={'personalExpense'}
+                    placeholder={'personal expense'}
+                    type={INPUT_TYPE_TEL}
+                />
+                <Input
+                    handleChange={this.handleChange}
+                    name={'sharedExpense'}
+                    placeholder={'shared expense'}
+                    type={INPUT_TYPE_TEL}
+                />
+                <Input
+                    handleChange={this.handleChange}
+                    name={'groceryExpense'}
+                    placeholder={'grocery expense'}
+                    type={INPUT_TYPE_TEL}
+                />
+                <Button
+                    label={'submit'}
+                    styleType={BUTTON_STYLE_TYPE_INLINE}
+                    type={BUTTON_TYPE_SUBMIT}
+                />
+            </form>
+        );
     }
 
     renderDashboardViews = () => {
@@ -100,7 +173,7 @@ class DashboardView extends React.Component {
             }
         } = this;
 
-        const tableDataList = currentTab === 0 ? MOCKED_TABLE_DATA : calculatedTransactions;
+        const tableDataList = currentTab === 0 ? enteredTransactions : calculatedTransactions;
 
         const tableHeaderList = currentTab === 0
             ? [
@@ -117,10 +190,13 @@ class DashboardView extends React.Component {
             ];
 
         return (
-            <TableComponent
-                tableDataList={tableDataList}
-                tableHeaderList={tableHeaderList}
-            />
+            <>
+                <TableComponent
+                    tableDataList={tableDataList}
+                    tableHeaderList={tableHeaderList}
+                />
+                {this.renderAddEntry()}
+            </>
         );
     }
 
