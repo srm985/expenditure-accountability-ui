@@ -28,18 +28,7 @@
         color: inherit;
     }
 
-    &__navigation {
-        display: flex;
-        align-items: center;
-        flex-direction: row-reverse;
-        justify-content: space-between;
-
-        min-width: 200px;
-
-        list-style: none;
-    }
-
-    &__navigation-link {
+    button {
         color: inherit;
     }
 }

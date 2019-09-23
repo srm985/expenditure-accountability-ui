@@ -15,10 +15,14 @@
     }
 
     &__tab {
+        font-weight: bold;
+
         flex: 1;
 
         cursor: pointer;
+        text-transform: uppercase;
 
+        color: $color-white;
         border: none;
         border-top: solid 1px $color-gray-dark;
         border-right: solid 1px $color-gray-dark;

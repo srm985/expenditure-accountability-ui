@@ -29,6 +29,8 @@ stories.add('text - default', () => {
 
     return (
         <InputComponent
+            label={'demo input'}
+            name={'demo-input'}
             placeholder={placeholder}
             type={type}
         />

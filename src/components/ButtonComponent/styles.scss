@@ -1,9 +1,46 @@
 @import '../../styles/constants';
 
+%button {
+    font-size: 16px;
+
+    box-sizing: border-box;
+    min-width: 120px;
+    height: 40px;
+    padding: 0 10px;
+
+    border-radius: 5px;
+}
+
 .ButtonComponent {
     cursor: pointer;
+    transition: background-color ease-in-out 0.2s, color ease-in-out 0.2s;
 
     border: none;
+    outline: none;
+
+    &--primary {
+        @extend %button;
+
+        color: $color-white;
+        background-color: $color-blue;
+
+        &:hover {
+            background-color: darken($color-blue, 10%);
+        }
+    }
+
+    &--secondary {
+        @extend %button;
+
+        color: $color-blue;
+        border: solid 1px $color-blue;
+        background-color: transparent;
+
+        &:hover {
+            color: $color-white;
+            background-color: $color-blue;
+        }
+    }
 
     &--inline {
         margin: 0;
@@ -12,7 +49,6 @@
         text-decoration: underline;
 
         color: $color-blue;
-        outline: none;
         background-color: transparent;
     }
 }

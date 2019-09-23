@@ -14,6 +14,8 @@ import AuthenticatedRoute from './components/AuthenticatedRoute';
 
 import requireAuthentication from './utils/requireAuthentication';
 
+import './styles/styles.scss';
+
 const App = () => (
     <BrowserRouter>
         <Switch>

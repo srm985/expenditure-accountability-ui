@@ -8,7 +8,8 @@ import './styles.scss';
 const TableComponent = (props) => {
     const {
         tableDataList,
-        tableHeaderList
+        tableHeaderList,
+        ...passedProps
     } = props;
 
     const {
@@ -26,14 +27,14 @@ const TableComponent = (props) => {
 
     const tableRows = tableDataList.map((tableRow) => {
         const {
-            transactionID,
-            ...remainingRowData
+            transactionID
         } = tableRow;
 
         return (
             <TableRow
+                {...passedProps}
                 key={transactionID}
-                rowData={remainingRowData}
+                rowData={tableRow}
             />
         );
     });

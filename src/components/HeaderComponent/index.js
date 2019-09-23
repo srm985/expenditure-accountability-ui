@@ -82,16 +82,12 @@ class HeaderComponent extends React.PureComponent {
                 <span className={`${displayName}__logo`}>
                     {'ExpenditureAccountability'}
                 </span>
-                <ul className={`${displayName}__navigation`}>
-                    <li>
-                        <Button
-                            className={`${displayName}__navigation-link`}
-                            handleClick={this.handleLogout}
-                            label={'Logout'}
-                            styleType={BUTTON_STYLE_TYPE_INLINE}
-                        />
-                    </li>
-                </ul>
+                <Button
+                    className={`${displayName}__navigation-link`}
+                    handleClick={this.handleLogout}
+                    label={'Logout'}
+                    styleType={BUTTON_STYLE_TYPE_INLINE}
+                />
             </header>
         );
     }

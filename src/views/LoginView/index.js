@@ -15,6 +15,14 @@ import {
 import Button from '../../components/ButtonComponent';
 import Input from '../../components/InputComponent';
 
+import {
+    INPUT_TYPE_PASSWORD
+} from '../../components/InputComponent/config';
+
+import backgroundImage from '../../assets/skyline.jpg';
+
+import './styles.scss';
+
 class LoginView extends React.PureComponent {
     constructor(props) {
         super(props);
@@ -47,9 +55,11 @@ class LoginView extends React.PureComponent {
 
     handleSubmit = (event) => {
         const {
-            password,
-            user
-        } = this.state;
+            state: {
+                password,
+                user
+            }
+        } = this;
 
         event.preventDefault();
 
@@ -78,62 +88,62 @@ class LoginView extends React.PureComponent {
         });
     }
 
-    test = () => {
-        makeCall({
-            method: 'GET',
-            URL: 'http://localhost:3100/api/test-auth'
-        }).then((response) => {
-            console.log({
-                response
-            });
-        }).catch((response) => {
-            console.log('not authorized:', response);
-        });
-    }
-
     render() {
         const {
-            isAuthenticated,
-            password,
-            user
-        } = this.state;
+            state: {
+                isAuthenticated,
+                password,
+                user
+            }
+        } = this;
+
+        const {
+            displayName
+        } = LoginView;
 
         return (
-            <>
-                {
-                    isAuthenticated
-                        ? (
-                            <Redirect to={'/dashboard'} />
-                        )
-                        : (
-                            <>
-                                <form onSubmit={this.handleSubmit}>
-                                    <Input
-                                        handleChange={this.handleChange}
-                                        name={'user'}
-                                        value={user}
-                                    />
-                                    <Input
-                                        handleChange={this.handleChange}
-                                        name={'password'}
-                                        value={password}
-                                    />
-                                    <Button
-                                        label={'Log In'}
-                                        type={BUTTON_TYPE_SUBMIT}
-                                    />
-                                </form>
-                                <Button
-                                    handleClick={this.test}
-                                    label={'test auth'}
-                                    type={'button'}
-                                />
-                            </>
-                        )
-                }
-            </>
+            isAuthenticated
+                ? (
+                    <Redirect to={'/dashboard'} />
+                )
+                : (
+                    <main
+                        className={displayName}
+                        style={{
+                            backgroundImage: `url('${backgroundImage}')`
+                        }}
+                    >
+                        <h1>
+                            {'Expenditure Accountability'}
+                        </h1>
+                        <form
+                            onSubmit={this.handleSubmit}
+                        >
+
+                            <Input
+                                handleChange={this.handleChange}
+                                label={'Email Address'}
+                                name={'user'}
+                                value={user}
+                            />
+                            <Input
+                                handleChange={this.handleChange}
+                                label={'Password'}
+                                name={'password'}
+                                type={INPUT_TYPE_PASSWORD}
+                                value={password}
+                            />
+                            <Button
+                                label={'Log In'}
+                                type={BUTTON_TYPE_SUBMIT}
+                            />
+                        </form>
+                    </main>
+                )
         );
     }
 }
+
+LoginView.displayName = 'LoginView';
 
 export default LoginView;

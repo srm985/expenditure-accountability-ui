@@ -54,6 +54,12 @@
                 "SwitchCase": 1
             }
         ],
+        "jsx-a11y/click-events-have-key-events": [
+            0
+        ],
+        "jsx-a11y/control-has-associated-label": [
+            0
+        ],
         "linebreak-style": [
             0
         ],

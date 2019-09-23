@@ -12,14 +12,6 @@ import {
 import './styles.scss';
 
 class TableRowComponent extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            isEditing: false
-        };
-    }
-
     handleChange = (event) => {
         const {
             target: {
@@ -33,25 +25,15 @@ class TableRowComponent extends React.Component {
         });
     }
 
-    handleToggleEdit = () => {
-        this.setState((previousState) => {
-            const {
-                isEditing
-            } = previousState;
-
-            return ({
-                isEditing: !isEditing
-            });
-        });
-    }
-
     render() {
         const {
             props: {
-                rowData
-            },
-            state: {
-                isEditing
+                currentlyEditingTransactionID,
+                handleClickEdit,
+                rowData: {
+                    transactionID,
+                    ...otherRowData
+                }
             }
         } = this;
 
@@ -59,7 +41,9 @@ class TableRowComponent extends React.Component {
             displayName
         } = TableRowComponent;
 
-        const clonedRowData = JSON.parse(JSON.stringify(rowData));
+        const isEditing = transactionID === currentlyEditingTransactionID;
+
+        const clonedRowData = JSON.parse(JSON.stringify(otherRowData));
 
         const buttonLabel = isEditing ? 'save' : 'edit';
 
@@ -97,7 +81,7 @@ class TableRowComponent extends React.Component {
                 {cells}
                 <Button
                     className={`${displayName}__edit-button`}
-                    handleClick={this.handleToggleEdit}
+                    handleClick={() => { handleClickEdit(transactionID); }}
                     label={buttonLabel}
                     styleType={BUTTON_STYLE_TYPE_INLINE}
                     type={BUTTON_TYPE_BUTTON}
@@ -110,10 +94,16 @@ class TableRowComponent extends React.Component {
 TableRowComponent.displayName = 'TableRowComponent';
 
 TableRowComponent.propTypes = {
-    rowData: PropTypes.shape({})
+    currentlyEditingTransactionID: PropTypes.string,
+    handleClickEdit: PropTypes.func,
+    rowData: PropTypes.shape({
+        transactionID: PropTypes.string
+    })
 };
 
 TableRowComponent.defaultProps = {
+    currentlyEditingTransactionID: '',
+    handleClickEdit: () => { },
     rowData: {}
 };
 

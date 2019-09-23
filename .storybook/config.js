@@ -12,11 +12,16 @@ import {
     withKnobs
 } from '@storybook/addon-knobs';
 
-addDecorator((storyFn, context) => withConsole()(storyFn)(context));
+// This must be first decorator.
 addDecorator(withInfo);
+
+addDecorator((storyFn, context) => withConsole()(storyFn)(context));
 addDecorator(withKnobs);
 
-/* eslint-disable global-require */
-function loadStories() { }
+const requiredStories = require.context('../src/components/', true, /stories\.js$/);
+
+const loadStories = () => {
+    requiredStories.keys().forEach(requiredStories);
+};
 
 configure(loadStories, module);
