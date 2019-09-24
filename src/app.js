@@ -9,6 +9,7 @@ import {
 import Dashboard from './views/DashboardView';
 import Login from './views/LoginView';
 import NotFound from './views/NotFoundView';
+import Splitwise from './views/SplitwiseView';
 
 import AuthenticatedRoute from './components/AuthenticatedRoute';
 
@@ -32,6 +33,11 @@ const App = () => (
                 component={Dashboard}
                 onEnter={requireAuthentication}
                 path={'/dashboard'}
+            />
+            <AuthenticatedRoute
+                component={Splitwise}
+                onEnter={requireAuthentication}
+                path={'/splitwise'}
             />
             <Route
                 component={NotFound}
