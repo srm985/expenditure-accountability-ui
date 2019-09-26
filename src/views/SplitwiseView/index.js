@@ -1,4 +1,15 @@
-const SplitwiseView = () => {
+import {
+    withRouter
+} from 'react-router-dom';
+import makeCall, {
+    CALL_TYPE_GET
+} from '../../utils/restful';
+
+const SplitwiseView = (props) => {
+    const {
+        history
+    } = props;
+
     const {
         location: {
             search: queryStrings
@@ -9,9 +20,18 @@ const SplitwiseView = () => {
         queryStrings
     });
 
-    const extractedCode = queryStrings.replace('?code=');
+    const extractedCode = queryStrings.replace('?code=', '').replace('&state=', '');
+
+    makeCall({
+        method: CALL_TYPE_GET,
+        URL: `http://localhost:3100/api/splitwise-token?code=${extractedCode}`
+    }).then(() => {
+        history.push('/');
+    }).catch(() => {
+        console.log('error!');
+    });
 
     return null;
 };
 
-export default SplitwiseView;
+export default withRouter(SplitwiseView);

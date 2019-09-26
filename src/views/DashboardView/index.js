@@ -9,6 +9,7 @@ import Modal from '../../components/ModalComponent';
 import Table from '../../components/TableComponent';
 
 import AddTransaction from '../../modules/AddTransactionModule';
+import LinkSplitwise from '../../modules/LinkSplitwiseModule';
 
 import {
     BUTTON_STYLE_TYPE_INLINE
@@ -33,13 +34,17 @@ class DashboardView extends React.Component {
             currentTab: 0,
             enteredTransactions: [],
             isAddingTransaction: false,
-            isEditModalShown: false
+            isEditModalShown: false,
+            isPromptLinkSplitwiseModalShown: false
         };
     }
 
     componentDidMount() {
         this.retrieveEnteredTransactions();
         this.retrieveCalculatedTransactions();
+
+        // TODO: Check if needed.
+        this.toggleSplitwisePromptModalVisible();
     }
 
     formatEnteredTransactions = (enteredTransactions) => {
@@ -194,6 +199,18 @@ class DashboardView extends React.Component {
         });
     }
 
+    toggleSplitwisePromptModalVisible = () => {
+        this.setState((previousState) => {
+            const {
+                isPromptLinkSplitwiseModalShown
+            } = previousState;
+
+            return ({
+                isPromptLinkSplitwiseModalShown: !isPromptLinkSplitwiseModalShown
+            });
+        });
+    }
+
     renderDashboardViews = () => {
         const {
             state: {
@@ -282,7 +299,8 @@ class DashboardView extends React.Component {
         const {
             state: {
                 isAddingTransaction,
-                isEditModalShown
+                isEditModalShown,
+                isPromptLinkSplitwiseModalShown
             }
         } = this;
 
@@ -322,6 +340,14 @@ class DashboardView extends React.Component {
                     handleCancel={this.toggleAddingTransaction}
                     handleSubmit={this.addTransaction}
                 />
+                {
+                    isPromptLinkSplitwiseModalShown
+                    && (
+                        <LinkSplitwise
+                            toggleModal={this.toggleSplitwisePromptModalVisible}
+                        />
+                    )
+                }
             </>
         );
     }
