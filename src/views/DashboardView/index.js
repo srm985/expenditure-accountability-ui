@@ -43,8 +43,20 @@ class DashboardView extends React.Component {
         this.retrieveEnteredTransactions();
         this.retrieveCalculatedTransactions();
 
-        // TODO: Check if needed.
-        this.toggleSplitwisePromptModalVisible();
+        makeCall({
+            method: CALL_TYPE_GET,
+            URL: 'http://localhost:3100/api/linked-splitwise'
+        }).then((response) => {
+            const {
+                isLinked
+            } = response;
+
+            if (!isLinked) {
+                this.toggleSplitwisePromptModalVisible();
+            }
+        }).catch(() => {
+            // No action required.
+        });
     }
 
     formatEnteredTransactions = (enteredTransactions) => {

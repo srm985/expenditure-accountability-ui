@@ -25,7 +25,7 @@ const makeCall = (parameters) => new Promise((resolve, reject) => {
         body,
         headers,
         method
-    }).then((response) => {
+    }).then((response = {}) => {
         const {
             ok
         } = response;

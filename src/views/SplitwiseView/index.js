@@ -26,9 +26,10 @@ const SplitwiseView = (props) => {
         method: CALL_TYPE_GET,
         URL: `http://localhost:3100/api/splitwise-token?code=${extractedCode}`
     }).then(() => {
+        console.group('pushing...');
         history.push('/');
-    }).catch(() => {
-        console.log('error!');
+    }).catch((error) => {
+        console.log('error!', error);
     });
 
     return null;
