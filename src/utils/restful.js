@@ -7,8 +7,8 @@ export const CALL_TYPE_PUT = 'PUT';
 
 const makeCall = (parameters) => new Promise((resolve, reject) => {
     const {
-        payload,
         method,
+        payload,
         URL
     } = parameters;
 
@@ -26,11 +26,18 @@ const makeCall = (parameters) => new Promise((resolve, reject) => {
         headers,
         method
     }).then((response = {}) => {
+        console.log({
+            response
+        });
         const {
-            ok
+            ok,
+            status
         } = response;
 
-        if (ok) {
+        if (status === 401) {
+            authentication.clear();
+            window.location.href = '/login';
+        } else if (ok) {
             resolve(response.json());
         } else {
             reject(response);
