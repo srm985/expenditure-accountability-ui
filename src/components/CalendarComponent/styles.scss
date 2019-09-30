@@ -1,0 +1,75 @@
+@import '../../styles/constants';
+
+.CalendarComponent {
+    width: 100%;
+
+    &__week-wrapper {
+        width: 100%;
+        height: 75px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+
+        &:first-of-type {
+            padding-top: 0;
+        }
+
+        &:last-of-type {
+            padding-bottom: 0;
+        }
+    }
+
+    &__week {
+        position: relative;
+
+        display: flex;
+
+        height: 100%;
+    }
+
+    &__week-status {
+        font-weight: bold;
+
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 100%;
+        height: 100%;
+
+        color: $color-black;
+        border-radius: 5px;
+
+        &--is-under {
+            background-color: rgba($color-green, 0.4);
+        }
+
+        &--is-over {
+            background-color: rgba($color-red, 0.4);
+        }
+    }
+
+    &__day {
+        flex: 1;
+
+        box-sizing: border-box;
+        height: 100%;
+        margin-left: 10px;
+        padding: 5px;
+
+        border-radius: 5px;
+        background-color: $color-gray-dark;
+
+        &:first-of-type {
+            margin-left: 0;
+        }
+    }
+
+    &__day-label {
+        color: $color-white;
+    }
+}

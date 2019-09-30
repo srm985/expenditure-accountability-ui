@@ -26,9 +26,6 @@ const makeCall = (parameters) => new Promise((resolve, reject) => {
         headers,
         method
     }).then((response = {}) => {
-        console.log({
-            response
-        });
         const {
             ok,
             status
@@ -38,7 +35,9 @@ const makeCall = (parameters) => new Promise((resolve, reject) => {
             authentication.clear();
             window.location.href = '/login';
         } else if (ok) {
-            resolve(response.json());
+            response.json().then((data) => {
+                resolve(JSON.parse(JSON.stringify(data)));
+            });
         } else {
             reject(response);
         }

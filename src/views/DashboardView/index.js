@@ -1,7 +1,9 @@
 import React from 'react';
 import moment from 'moment';
 
-import Button from '../../components/ButtonComponent';
+import Calendar from '../../components/CalendarComponent';
+import Card from '../../components/CardComponent';
+import FAB from '../../components/FABComponent';
 import Grid from '../../components/GridComponent';
 import GridItem from '../../components/GridItemComponent';
 import Header from '../../components/HeaderComponent';
@@ -11,11 +13,8 @@ import Table from '../../components/TableComponent';
 import AddTransaction from '../../modules/AddTransactionModule';
 import LinkSplitwise from '../../modules/LinkSplitwiseModule';
 
-import {
-    BUTTON_STYLE_TYPE_INLINE
-} from '../../components/ButtonComponent/config';
-
 import classNames from '../../utils/classNames';
+import formatCurrency from '../../utils/formatCurrency';
 import makeCall, {
     CALL_TYPE_DELETE,
     CALL_TYPE_GET,
@@ -41,7 +40,6 @@ class DashboardView extends React.Component {
 
     componentDidMount() {
         this.retrieveEnteredTransactions();
-        this.retrieveCalculatedTransactions();
 
         makeCall({
             method: CALL_TYPE_GET,
@@ -64,6 +62,7 @@ class DashboardView extends React.Component {
             const {
                 date,
                 groceryExpense,
+                isEditable,
                 personalExpense,
                 sharedExpense,
                 transactionID
@@ -72,16 +71,42 @@ class DashboardView extends React.Component {
             /* eslint-disable sort-keys */
             return ({
                 transactionID,
+                isEditable,
                 date: moment(date).format('DD MMM YYYY'),
-                personalExpense: `$${personalExpense}`,
-                sharedExpense: `$${sharedExpense}`,
-                groceryExpense: `$${groceryExpense}`
+                personalExpense: formatCurrency(personalExpense),
+                sharedExpense: formatCurrency(sharedExpense),
+                groceryExpense: formatCurrency(groceryExpense)
             });
             /* eslint-enable sort-keys */
         });
 
         this.setState({
             enteredTransactions: formattedTransactions
+        });
+    }
+
+    formatCalculatedTransactions = (calculatedTransactions) => {
+        const formattedTransactions = calculatedTransactions.map((transaction) => {
+            const {
+                date,
+                didExceedWeeklyLimit,
+                groceryExpense,
+                personalExpense,
+                sharedExpense
+            } = transaction;
+
+            return ({
+                didExceedWeeklyLimit,
+                endDate: moment(date).format('DD MMM YYYY'),
+                groceryExpense: formatCurrency(groceryExpense),
+                personalExpense: formatCurrency(personalExpense),
+                sharedExpense: formatCurrency(sharedExpense),
+                startDate: moment(date).subtract(6, 'days').format('DD MMM YYYY')
+            });
+        });
+
+        this.setState({
+            calculatedTransactions: formattedTransactions
         });
     }
 
@@ -105,11 +130,7 @@ class DashboardView extends React.Component {
             method: CALL_TYPE_GET,
             URL: 'http://localhost:3100/api/calculated-transactions'
         }).then((response) => {
-            console.log({
-                response
-            });
-
-            this.formatEnteredTransactions(response);
+            this.formatCalculatedTransactions(response);
         }).catch(() => {
             // No action required.
         });
@@ -178,6 +199,12 @@ class DashboardView extends React.Component {
     }
 
     handleChangeTab = (selectedTabNumber) => {
+        if (selectedTabNumber === 0) {
+            this.retrieveEnteredTransactions();
+        } else {
+            this.retrieveCalculatedTransactions();
+        }
+
         this.setState({
             currentTab: selectedTabNumber
         });
@@ -233,36 +260,27 @@ class DashboardView extends React.Component {
             }
         } = this;
 
-        const tableDataList = currentTab === 0 ? enteredTransactions : calculatedTransactions;
 
-        const tableHeaderList = currentTab === 0
-            ? [
-                'Date',
-                'Personal Expense',
-                'Shared Expense',
-                'Grocery Expense'
-            ]
-            : [
-                'Date',
-                'Personal Expense',
-                'Shared Expense',
-                'Grocery Expense'
-            ];
+        const tableHeaderList = [
+            'Date',
+            'Personal Expense',
+            'Shared Expense',
+            'Grocery Expense'
+        ];
 
         return (
-            <>
-                <Table
-                    currentlyEditingTransactionID={currentlyEditingTransactionID}
-                    handleClickEdit={this.handleClickEditTransaction}
-                    tableDataList={tableDataList}
-                    tableHeaderList={tableHeaderList}
-                />
-                <Button
-                    handleClick={this.toggleAddingTransaction}
-                    label={'add transaction'}
-                    styleType={BUTTON_STYLE_TYPE_INLINE}
-                />
-            </>
+            currentTab === 0
+                ? (
+                    <Table
+                        currentlyEditingTransactionID={currentlyEditingTransactionID}
+                        handleClickEdit={this.handleClickEditTransaction}
+                        tableDataList={enteredTransactions}
+                        tableHeaderList={tableHeaderList}
+                    />
+                )
+                : (
+                    <Calendar weekList={calculatedTransactions} />
+                )
         );
     }
 
@@ -329,11 +347,13 @@ class DashboardView extends React.Component {
                             columns={{
                                 large: [
                                     1,
-                                    12
+                                    13
                                 ]
                             }}
                         >
-                            {this.renderDashboardViews()}
+                            <Card>
+                                {this.renderDashboardViews()}
+                            </Card>
                         </GridItem>
                     </Grid>
 
@@ -352,6 +372,7 @@ class DashboardView extends React.Component {
                     handleCancel={this.toggleAddingTransaction}
                     handleSubmit={this.addTransaction}
                 />
+                <FAB handleClick={this.toggleAddingTransaction} />
                 {
                     isPromptLinkSplitwiseModalShown
                     && (

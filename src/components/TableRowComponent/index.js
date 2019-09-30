@@ -1,13 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Button from '../ButtonComponent';
 import Input from '../InputComponent';
-
-import {
-    BUTTON_STYLE_TYPE_INLINE,
-    BUTTON_TYPE_BUTTON
-} from '../ButtonComponent/config';
+import Popover from '../PopoverComponent';
 
 import './styles.scss';
 
@@ -31,6 +26,7 @@ class TableRowComponent extends React.Component {
                 currentlyEditingTransactionID,
                 handleClickEdit,
                 rowData: {
+                    isEditable,
                     transactionID,
                     ...otherRowData
                 }
@@ -44,8 +40,6 @@ class TableRowComponent extends React.Component {
         const isEditing = transactionID === currentlyEditingTransactionID;
 
         const clonedRowData = JSON.parse(JSON.stringify(otherRowData));
-
-        const buttonLabel = isEditing ? 'save' : 'edit';
 
         const cells = Object.keys(clonedRowData).map((cellName) => {
             const {
@@ -79,13 +73,25 @@ class TableRowComponent extends React.Component {
         return (
             <li className={displayName}>
                 {cells}
-                <Button
-                    className={`${displayName}__edit-button`}
-                    handleClick={() => { handleClickEdit(transactionID); }}
-                    label={buttonLabel}
-                    styleType={BUTTON_STYLE_TYPE_INLINE}
-                    type={BUTTON_TYPE_BUTTON}
-                />
+                {
+                    isEditable
+                    && (
+                        <Popover
+                            optionsList={
+                                [
+                                    {
+                                        action: () => handleClickEdit(transactionID),
+                                        label: 'edit'
+                                    },
+                                    {
+                                        action: () => { },
+                                        label: 'delete'
+                                    }
+                                ]
+                            }
+                        />
+                    )
+                }
             </li>
         );
     }
@@ -97,6 +103,7 @@ TableRowComponent.propTypes = {
     currentlyEditingTransactionID: PropTypes.string,
     handleClickEdit: PropTypes.func,
     rowData: PropTypes.shape({
+        isEditable: PropTypes.bool,
         transactionID: PropTypes.string
     })
 };

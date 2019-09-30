@@ -1,0 +1,50 @@
+@import '../../styles/constants';
+
+.FABComponent {
+    position: fixed;
+    right: 20px;
+    bottom: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: 50px;
+    height: 50px;
+
+    cursor: pointer;
+
+    border: none;
+    border-radius: 50%;
+    outline: none;
+    background-color: $color-orange;
+    box-shadow: 0 0 5px $color-gray-dark;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    & > span {
+        position: relative;
+
+        display: inline-block;
+
+        width: 4px;
+        height: 20px;
+
+        background-color: $color-white;
+
+        &::before {
+            display: inline-block;
+
+            width: 100%;
+            height: 100%;
+
+            content: '';
+            transform: rotate(90deg);
+
+            background-color: inherit;
+        }
+    }
+}

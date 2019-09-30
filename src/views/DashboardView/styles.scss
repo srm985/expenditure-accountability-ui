@@ -1,8 +1,6 @@
 @import '../../styles/constants';
 
 .DashboardView {
-    padding-top: #{$header-height + 20px};
-
     &__tabs-wrapper {
         position: fixed;
         bottom: 0;
@@ -27,14 +25,15 @@
         border-top: solid 1px $color-gray-dark;
         border-right: solid 1px $color-gray-dark;
         outline: none;
-        background-color: $color-gray-light;
+        background-color: $color-gray-dark;
 
         &:last-of-type {
             border-right: none;
         }
 
         &--active {
-            background-color: $color-gray-dark;
+            color: $color-white;
+            background-color: $color-blue;
         }
     }
 }

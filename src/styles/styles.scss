@@ -1,10 +1,19 @@
+@import './constants';
+
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
 $spacing-unit: 8px;
 
 body {
+    font-family: 'Lato', sans-serif;
+
+    box-sizing: border-box;
     width: 100%;
     min-height: 100vh;
     margin: 0;
-    padding: 0;
+    padding: #{$header-height + 20} 15px 60px;
+
+    color: $color-black;
+    background-color: $color-gray-light;
 }
 
 h1

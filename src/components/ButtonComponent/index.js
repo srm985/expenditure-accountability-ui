@@ -19,6 +19,7 @@ const ButtonComponent = (props) => {
         className,
         handleClick,
         href,
+        isFullWidth,
         label,
         styleType,
         type
@@ -32,6 +33,7 @@ const ButtonComponent = (props) => {
         ButtonComponent.displayName,
         className,
         {
+            [`${ButtonComponent.displayName}--full-width`]: isFullWidth && (styleType === BUTTON_STYLE_TYPE_PRIMARY || styleType === BUTTON_STYLE_TYPE_SECONDARY),
             [`${ButtonComponent.displayName}--inline`]: styleType === BUTTON_STYLE_TYPE_INLINE,
             [`${ButtonComponent.displayName}--primary`]: styleType === BUTTON_STYLE_TYPE_PRIMARY,
             [`${ButtonComponent.displayName}--secondary`]: styleType === BUTTON_STYLE_TYPE_SECONDARY
@@ -74,6 +76,7 @@ ButtonComponent.propTypes = {
     className: PropTypes.string,
     handleClick: PropTypes.func,
     href: PropTypes.string,
+    isFullWidth: PropTypes.bool,
     label: PropTypes.string,
     styleType: PropTypes.oneOf(BUTTON_STYLE_TYPES),
     type: PropTypes.oneOf(BUTTON_TYPES)
@@ -83,6 +86,7 @@ ButtonComponent.defaultProps = {
     className: '',
     handleClick: () => { },
     href: '',
+    isFullWidth: false,
     label: '',
     styleType: BUTTON_STYLE_TYPE_PRIMARY,
     type: BUTTON_TYPE_BUTTON

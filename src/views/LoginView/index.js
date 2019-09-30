@@ -13,13 +13,16 @@ import {
 } from '../../components/ButtonComponent/config';
 
 import Button from '../../components/ButtonComponent';
+import Grid from '../../components/GridComponent';
+import GridItem from '../../components/GridItemComponent';
 import Input from '../../components/InputComponent';
 
 import {
+    INPUT_TYPE_EMAIL,
     INPUT_TYPE_PASSWORD
 } from '../../components/InputComponent/config';
 
-import backgroundImage from '../../assets/skyline.jpg';
+import backgroundImage from '../../assets/chicago.jpg';
 
 import './styles.scss';
 
@@ -83,8 +86,8 @@ class LoginView extends React.PureComponent {
                     isAuthenticated: true
                 });
             }
-        }).catch((response) => {
-            console.log('error:', response);
+        }).catch(() => {
+            // TODO: Handle invalid attempt.
         });
     }
 
@@ -113,31 +116,48 @@ class LoginView extends React.PureComponent {
                             backgroundImage: `url('${backgroundImage}')`
                         }}
                     >
-                        <h1>
-                            {'Expenditure Accountability'}
-                        </h1>
-                        <form
-                            onSubmit={this.handleSubmit}
-                        >
+                        <Grid>
+                            <GridItem
+                                columns={{
+                                    medium: [
+                                        4,
+                                        10
+                                    ]
+                                }}
+                            >
+                                <section>
+                                    <h1 className={'mb--5'}>
+                                        {'Expenditure Accountability'}
+                                    </h1>
+                                    <form
+                                        onSubmit={this.handleSubmit}
+                                    >
 
-                            <Input
-                                handleChange={this.handleChange}
-                                label={'Email Address'}
-                                name={'user'}
-                                value={user}
-                            />
-                            <Input
-                                handleChange={this.handleChange}
-                                label={'Password'}
-                                name={'password'}
-                                type={INPUT_TYPE_PASSWORD}
-                                value={password}
-                            />
-                            <Button
-                                label={'Log In'}
-                                type={BUTTON_TYPE_SUBMIT}
-                            />
-                        </form>
+                                        <Input
+                                            className={'mb--2'}
+                                            handleChange={this.handleChange}
+                                            label={'Email Address'}
+                                            name={'user'}
+                                            type={INPUT_TYPE_EMAIL}
+                                            value={user}
+                                        />
+                                        <Input
+                                            className={'mb--4'}
+                                            handleChange={this.handleChange}
+                                            label={'Password'}
+                                            name={'password'}
+                                            type={INPUT_TYPE_PASSWORD}
+                                            value={password}
+                                        />
+                                        <Button
+                                            isFullWidth
+                                            label={'Log In'}
+                                            type={BUTTON_TYPE_SUBMIT}
+                                        />
+                                    </form>
+                                </section>
+                            </GridItem>
+                        </Grid>
                     </main>
                 )
         );

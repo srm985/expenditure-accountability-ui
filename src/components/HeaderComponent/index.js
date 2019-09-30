@@ -40,10 +40,6 @@ class HeaderComponent extends React.PureComponent {
 
         const hasScrolled = !!(body.scrollTop || documentElement.scrollTop);
 
-        console.log({
-            hasScrolled
-        });
-
         this.setState({
             hasScrolled
         });
@@ -63,8 +59,13 @@ class HeaderComponent extends React.PureComponent {
 
     render() {
         const {
-            hasScrolled
-        } = this.state;
+            props: {
+                shouldChangeOnScroll
+            },
+            state: {
+                hasScrolled
+            }
+        } = this;
 
         const {
             displayName
@@ -73,7 +74,7 @@ class HeaderComponent extends React.PureComponent {
         const componentClassNames = classNames(
             displayName,
             {
-                [`${displayName}--scrolled`]: hasScrolled
+                [`${displayName}--scrolled`]: hasScrolled && shouldChangeOnScroll
             }
         );
 
@@ -98,11 +99,13 @@ HeaderComponent.displayName = 'HeaderComponent';
 HeaderComponent.propTypes = {
     history: PropTypes.shape({
         push: PropTypes.func
-    })
+    }),
+    shouldChangeOnScroll: PropTypes.bool
 };
 
 HeaderComponent.defaultProps = {
-    history: {}
+    history: {},
+    shouldChangeOnScroll: false
 };
 
 export default withRouter(HeaderComponent);
