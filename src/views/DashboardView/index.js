@@ -145,8 +145,16 @@ class DashboardView extends React.Component {
     }
 
     updateExistingTransaction = (transactionData) => {
-        console.log({
-            transactionData
+        makeCall({
+            method: CALL_TYPE_PUT,
+            payload: {
+                ...transactionData
+            },
+            URL: '/api/edit-transaction'
+        }).then(() => {
+            this.retrieveEnteredTransactions();
+        }).catch(() => {
+            // No action needed.
         });
     }
 

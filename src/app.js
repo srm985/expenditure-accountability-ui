@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 
 import Dashboard from './views/DashboardView';
+import Enroll from './views/EnrollView';
 import Login from './views/LoginView';
 import NotFound from './views/NotFoundView';
 import Splitwise from './views/SplitwiseView';
@@ -26,6 +27,10 @@ const App = () => (
                     exact
                     from={'/'}
                     to={'/dashboard'}
+                />
+                <Route
+                    component={Enroll}
+                    path={'/enroll'}
                 />
                 <Route
                     component={Login}

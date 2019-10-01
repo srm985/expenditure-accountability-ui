@@ -8,15 +8,14 @@ import makeCall, {
     CALL_TYPE_POST
 } from '../../utils/restful';
 
-import {
-    BUTTON_TYPE_SUBMIT
-} from '../../components/ButtonComponent/config';
-
 import Button from '../../components/ButtonComponent';
 import Grid from '../../components/GridComponent';
 import GridItem from '../../components/GridItemComponent';
 import Input from '../../components/InputComponent';
 
+import {
+    BUTTON_TYPE_SUBMIT
+} from '../../components/ButtonComponent/config';
 import {
     INPUT_TYPE_EMAIL,
     INPUT_TYPE_PASSWORD
