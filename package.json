@@ -51,6 +51,7 @@
     "sass-lint": "^1.13.1",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.0",
+    "svg-inline-loader": "^0.8.0",
     "webpack": "^4.40.2",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.1"

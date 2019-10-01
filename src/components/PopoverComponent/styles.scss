@@ -38,7 +38,7 @@
     &__popover {
         position: absolute;
         top: 20px;
-        left: -10px;
+        left: -70px;
 
         width: 100px;
 
@@ -61,7 +61,7 @@
         position: absolute;
         z-index: 3;
         top: -5px;
-        left: 16px;
+        left: 76px;
 
         width: 10px;
         height: 10px;
@@ -85,13 +85,21 @@
     }
 
     &__popover-option {
+        font-size: 18px;
+
         box-sizing: border-box;
-        padding: 12px 10px;
+        padding: 10px;
+
+        text-align: center;
 
         border-bottom: solid 1px $color-gray-dark;
 
         &:last-of-type {
             border: none;
+        }
+
+        button {
+            text-decoration: none;
         }
     }
 }

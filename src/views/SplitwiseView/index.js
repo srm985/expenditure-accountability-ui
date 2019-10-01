@@ -16,10 +16,6 @@ const SplitwiseView = (props) => {
         }
     } = window;
 
-    console.log({
-        queryStrings
-    });
-
     const extractedCode = queryStrings.replace('?code=', '').replace('&state=', '');
 
     makeCall({
@@ -28,8 +24,8 @@ const SplitwiseView = (props) => {
     }).then(() => {
         console.group('pushing...');
         history.push('/');
-    }).catch((error) => {
-        console.log('error!', error);
+    }).catch(() => {
+        // No action needed.
     });
 
     return null;

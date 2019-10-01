@@ -25,17 +25,11 @@ class LinkSplitwiseModule extends React.Component {
                 splitwiseAuthorizationURL
             } = response;
 
-            console.log({
-                splitwiseAuthorizationURL
-            });
-
             this.setState({
                 splitwiseAuthorizationURL
             });
-        }).catch((error) => {
-            console.log({
-                error
-            });
+        }).catch(() => {
+            // No action needed.
         });
     }
 

@@ -11,18 +11,40 @@
     border-top: solid 1px $color-gray-dark;
 
     &__cell {
+        font-size: 14px;
+
         box-sizing: border-box;
-        width: 22.5%;
-        padding-right: 10px;
+        width: 25%;
+
+        text-align: right;
+
+        &:first-of-type {
+            width: 15%;
+
+            text-align: left;
+
+            input {
+                text-align: left;
+            }
+        }
 
         input {
-            width: 100%;
+            text-align: right;
         }
     }
 
     &__edit-button {
+        display: flex;
         flex: 1;
+        justify-content: flex-end;
 
-        justify-self: center;
+        .IconComponent {
+            width: 20px;
+            height: 20px;
+
+            cursor: pointer;
+
+            color: $color-blue;
+        }
     }
 }

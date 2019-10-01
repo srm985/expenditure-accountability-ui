@@ -7,7 +7,6 @@ import FAB from '../../components/FABComponent';
 import Grid from '../../components/GridComponent';
 import GridItem from '../../components/GridItemComponent';
 import Header from '../../components/HeaderComponent';
-import Modal from '../../components/ModalComponent';
 import Table from '../../components/TableComponent';
 
 import AddTransaction from '../../modules/AddTransactionModule';
@@ -29,11 +28,9 @@ class DashboardView extends React.Component {
 
         this.state = {
             calculatedTransactions: [],
-            currentlyEditingTransactionID: '',
             currentTab: 0,
             enteredTransactions: [],
             isAddingTransaction: false,
-            isEditModalShown: false,
             isPromptLinkSplitwiseModalShown: false
         };
     }
@@ -72,7 +69,7 @@ class DashboardView extends React.Component {
             return ({
                 transactionID,
                 isEditable,
-                date: moment(date).format('DD MMM YYYY'),
+                date: moment(date).format('DD.MM.YY'),
                 personalExpense: formatCurrency(personalExpense),
                 sharedExpense: formatCurrency(sharedExpense),
                 groceryExpense: formatCurrency(groceryExpense)
@@ -97,11 +94,11 @@ class DashboardView extends React.Component {
 
             return ({
                 didExceedWeeklyLimit,
-                endDate: moment(date).format('DD MMM YYYY'),
+                endDate: moment(date).format('DD.MM.YY'),
                 groceryExpense: formatCurrency(groceryExpense),
                 personalExpense: formatCurrency(personalExpense),
                 sharedExpense: formatCurrency(sharedExpense),
-                startDate: moment(date).subtract(6, 'days').format('DD MMM YYYY')
+                startDate: moment(date).subtract(6, 'days').format('DD.MM.YY')
             });
         });
 
@@ -115,10 +112,6 @@ class DashboardView extends React.Component {
             method: CALL_TYPE_GET,
             URL: 'http://localhost:3100/api/retrieve-transactions'
         }).then((response) => {
-            console.log({
-                response
-            });
-
             this.formatEnteredTransactions(response);
         }).catch(() => {
             // No action required.
@@ -151,50 +144,23 @@ class DashboardView extends React.Component {
         });
     }
 
-    updateExistingTransaction = () => {
-        this.hideEditModal();
+    updateExistingTransaction = (transactionData) => {
+        console.log({
+            transactionData
+        });
     }
 
-    deleteExistingTransaction = () => {
-        const {
-            state: {
-                currentlyEditingTransactionID
-            }
-        } = this;
-
-        this.hideEditModal();
-
+    deleteExistingTransaction = (transactionID) => {
         makeCall({
             method: CALL_TYPE_DELETE,
             payload: {
-                transactionID: currentlyEditingTransactionID
+                transactionID
             },
             URL: 'http://localhost:3100/api/delete-transaction'
         }).then(() => {
-            console.log('retrieve');
             this.retrieveEnteredTransactions();
-        }).catch((err) => {
-            console.log(err);
+        }).catch(() => {
             // No action needed.
-        });
-    }
-
-    showEditModal = () => {
-        this.setState({
-            isEditModalShown: true
-        });
-    }
-
-    hideEditModal = (shouldClearTransaction = true) => {
-        this.setState((previousState) => {
-            const {
-                currentlyEditingTransactionID
-            } = previousState;
-
-            return ({
-                currentlyEditingTransactionID: shouldClearTransaction ? '' : currentlyEditingTransactionID,
-                isEditModalShown: false
-            });
         });
     }
 
@@ -208,22 +174,6 @@ class DashboardView extends React.Component {
         this.setState({
             currentTab: selectedTabNumber
         });
-    }
-
-    handleClickEditTransaction = (transactionID) => {
-        const {
-            state: {
-                currentlyEditingTransactionID
-            }
-        } = this;
-
-        if (transactionID === currentlyEditingTransactionID) {
-            this.updateExistingTransaction();
-        } else {
-            this.setState({
-                currentlyEditingTransactionID: transactionID
-            }, this.showEditModal);
-        }
     }
 
     toggleAddingTransaction = () => {
@@ -255,7 +205,6 @@ class DashboardView extends React.Component {
             state: {
                 calculatedTransactions,
                 currentTab,
-                currentlyEditingTransactionID,
                 enteredTransactions
             }
         } = this;
@@ -272,10 +221,10 @@ class DashboardView extends React.Component {
             currentTab === 0
                 ? (
                     <Table
-                        currentlyEditingTransactionID={currentlyEditingTransactionID}
-                        handleClickEdit={this.handleClickEditTransaction}
+                        deleteTransaction={this.deleteExistingTransaction}
                         tableDataList={enteredTransactions}
                         tableHeaderList={tableHeaderList}
+                        updateTransaction={this.updateExistingTransaction}
                     />
                 )
                 : (
@@ -329,7 +278,6 @@ class DashboardView extends React.Component {
         const {
             state: {
                 isAddingTransaction,
-                isEditModalShown,
                 isPromptLinkSplitwiseModalShown
             }
         } = this;
@@ -359,14 +307,6 @@ class DashboardView extends React.Component {
 
                 </main>
                 {this.renderTabs()}
-                <Modal
-                    handleClickCTAPrimary={() => { this.hideEditModal(false); }}
-                    handleClickCTASecondary={this.deleteExistingTransaction}
-                    handleClose={this.hideEditModal}
-                    isShown={isEditModalShown}
-                    labelCTAPrimary={'Edit'}
-                    labelCTASecondary={'Delete'}
-                />
                 <AddTransaction
                     isAddingTransaction={isAddingTransaction}
                     handleCancel={this.toggleAddingTransaction}

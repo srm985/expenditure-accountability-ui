@@ -14,5 +14,11 @@
         display: inline-block;
 
         width: 22.5%;
+
+        text-align: right;
+
+        &:first-of-type {
+            text-align: left;
+        }
     }
 }

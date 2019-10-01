@@ -1,12 +1,50 @@
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import Icon from '../IconComponent';
 import Input from '../InputComponent';
 import Popover from '../PopoverComponent';
+
+import {
+    save
+} from '../../assets/icons';
 
 import './styles.scss';
 
 class TableRowComponent extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            date: '',
+            groceryExpense: '',
+            isEditing: false,
+            personalExpense: '',
+            sharedExpense: ''
+        };
+    }
+
+    componentDidMount() {
+        const {
+            props: {
+                rowData: {
+                    date,
+                    groceryExpense,
+                    personalExpense,
+                    sharedExpense
+                }
+            }
+        } = this;
+
+        this.setState({
+            date,
+            groceryExpense,
+            personalExpense,
+            sharedExpense
+        });
+    }
+
     handleChange = (event) => {
         const {
             target: {
@@ -20,24 +58,63 @@ class TableRowComponent extends React.Component {
         });
     }
 
+    handleSave = () => {
+        const {
+            props: {
+                rowData: {
+                    transactionID
+                },
+                updateTransaction
+            },
+            state: {
+                date,
+                groceryExpense,
+                personalExpense,
+                sharedExpense
+            }
+        } = this;
+
+        updateTransaction({
+            date: moment(date).toISOString(),
+            groceryExpense: parseFloat(groceryExpense.replace('$', '')),
+            personalExpense: parseFloat(personalExpense.replace('$', '')),
+            sharedExpense: parseFloat(sharedExpense.replace('$', '')),
+            transactionID
+        });
+
+        this.toggleEditing();
+    }
+
+    toggleEditing = () => {
+        this.setState((previousState) => {
+            const {
+                isEditing
+            } = previousState;
+
+            return ({
+                isEditing: !isEditing
+            });
+        });
+    }
+
     render() {
         const {
             props: {
-                currentlyEditingTransactionID,
-                handleClickEdit,
+                deleteTransaction,
                 rowData: {
                     isEditable,
                     transactionID,
                     ...otherRowData
                 }
+            },
+            state: {
+                isEditing
             }
         } = this;
 
         const {
             displayName
         } = TableRowComponent;
-
-        const isEditing = transactionID === currentlyEditingTransactionID;
 
         const clonedRowData = JSON.parse(JSON.stringify(otherRowData));
 
@@ -76,20 +153,33 @@ class TableRowComponent extends React.Component {
                 {
                     isEditable
                     && (
-                        <Popover
-                            optionsList={
-                                [
-                                    {
-                                        action: () => handleClickEdit(transactionID),
-                                        label: 'edit'
-                                    },
-                                    {
-                                        action: () => { },
-                                        label: 'delete'
-                                    }
-                                ]
+                        <div className={`${displayName}__edit-button`}>
+                            {
+                                isEditing
+                                    ? (
+                                        <Icon
+                                            icon={save}
+                                            handleClick={this.handleSave}
+                                        />
+                                    )
+                                    : (
+                                        <Popover
+                                            optionsList={
+                                                [
+                                                    {
+                                                        action: this.toggleEditing,
+                                                        label: 'edit'
+                                                    },
+                                                    {
+                                                        action: () => deleteTransaction(transactionID),
+                                                        label: 'delete'
+                                                    }
+                                                ]
+                                            }
+                                        />
+                                    )
                             }
-                        />
+                        </div>
                     )
                 }
             </li>
@@ -100,18 +190,22 @@ class TableRowComponent extends React.Component {
 TableRowComponent.displayName = 'TableRowComponent';
 
 TableRowComponent.propTypes = {
-    currentlyEditingTransactionID: PropTypes.string,
-    handleClickEdit: PropTypes.func,
+    deleteTransaction: PropTypes.func,
     rowData: PropTypes.shape({
+        date: PropTypes.string,
+        groceryExpense: PropTypes.number,
         isEditable: PropTypes.bool,
+        personalExpense: PropTypes.number,
+        sharedExpense: PropTypes.number,
         transactionID: PropTypes.string
-    })
+    }),
+    updateTransaction: PropTypes.func
 };
 
 TableRowComponent.defaultProps = {
-    currentlyEditingTransactionID: '',
-    handleClickEdit: () => { },
-    rowData: {}
+    deleteTransaction: () => { },
+    rowData: {},
+    updateTransaction: () => { }
 };
 
 export default TableRowComponent;
