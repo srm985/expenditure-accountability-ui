@@ -40,7 +40,7 @@ class DashboardView extends React.Component {
 
         makeCall({
             method: CALL_TYPE_GET,
-            URL: 'http://localhost:3100/api/linked-splitwise'
+            URL: '/api/linked-splitwise'
         }).then((response) => {
             const {
                 isLinked
@@ -110,7 +110,7 @@ class DashboardView extends React.Component {
     retrieveEnteredTransactions = () => {
         makeCall({
             method: CALL_TYPE_GET,
-            URL: 'http://localhost:3100/api/retrieve-transactions'
+            URL: '/api/retrieve-transactions'
         }).then((response) => {
             this.formatEnteredTransactions(response);
         }).catch(() => {
@@ -121,7 +121,7 @@ class DashboardView extends React.Component {
     retrieveCalculatedTransactions = () => {
         makeCall({
             method: CALL_TYPE_GET,
-            URL: 'http://localhost:3100/api/calculated-transactions'
+            URL: '/api/calculated-transactions'
         }).then((response) => {
             this.formatCalculatedTransactions(response);
         }).catch(() => {
@@ -135,7 +135,7 @@ class DashboardView extends React.Component {
             payload: {
                 ...transactionData
             },
-            URL: 'http://localhost:3100/api/add-transaction'
+            URL: '/api/add-transaction'
         }).then(() => {
             this.toggleAddingTransaction();
             this.retrieveEnteredTransactions();
@@ -156,7 +156,7 @@ class DashboardView extends React.Component {
             payload: {
                 transactionID
             },
-            URL: 'http://localhost:3100/api/delete-transaction'
+            URL: '/api/delete-transaction'
         }).then(() => {
             this.retrieveEnteredTransactions();
         }).catch(() => {

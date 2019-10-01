@@ -1,5 +1,7 @@
 import authentication from './authentication';
 
+import loadingIndicator from './loadingIndicator';
+
 export const CALL_TYPE_DELETE = 'DELETE';
 export const CALL_TYPE_GET = 'GET';
 export const CALL_TYPE_POST = 'POST';
@@ -12,6 +14,14 @@ const makeCall = (parameters) => new Promise((resolve, reject) => {
         URL
     } = parameters;
 
+    const {
+        location: {
+            origin
+        }
+    } = window;
+
+    const baseURL = origin.replace(/:\d+$/, '');
+
     const token = authentication.retrieve();
 
     const headers = new Headers({
@@ -21,7 +31,10 @@ const makeCall = (parameters) => new Promise((resolve, reject) => {
 
     const body = payload ? JSON.stringify(payload) : undefined;
 
-    fetch(URL, {
+    loadingIndicator.show();
+
+    // We assume our API will be on port 3100.
+    fetch(`${baseURL}:3100${URL}`, {
         body,
         headers,
         method
@@ -43,6 +56,8 @@ const makeCall = (parameters) => new Promise((resolve, reject) => {
         }
     }).catch((response) => {
         reject(response);
+    }).finally(() => {
+        loadingIndicator.hide();
     });
 });
 

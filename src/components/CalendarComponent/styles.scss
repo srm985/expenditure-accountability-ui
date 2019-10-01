@@ -45,11 +45,11 @@
         border-radius: 5px;
 
         &--is-under {
-            background-color: rgba($color-green, 0.4);
+            background-color: adjust-color($color-green, $alpha: -0.6);
         }
 
         &--is-over {
-            background-color: rgba($color-red, 0.4);
+            background-color: adjust-color($color-red, $alpha: -0.6);
         }
     }
 

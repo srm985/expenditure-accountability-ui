@@ -12,38 +12,42 @@ import NotFound from './views/NotFoundView';
 import Splitwise from './views/SplitwiseView';
 
 import AuthenticatedRoute from './components/AuthenticatedRoute';
+import LoadingIndicator from './components/LoadingIndicatorComponent';
 
 import requireAuthentication from './utils/requireAuthentication';
 
 import './styles/styles.scss';
 
 const App = () => (
-    <BrowserRouter>
-        <Switch>
-            <Redirect
-                exact
-                from={'/'}
-                to={'/dashboard'}
-            />
-            <Route
-                component={Login}
-                path={'/login'}
-            />
-            <AuthenticatedRoute
-                component={Dashboard}
-                onEnter={requireAuthentication}
-                path={'/dashboard'}
-            />
-            <AuthenticatedRoute
-                component={Splitwise}
-                onEnter={requireAuthentication}
-                path={'/splitwise'}
-            />
-            <Route
-                component={NotFound}
-            />
-        </Switch>
-    </BrowserRouter>
+    <>
+        <BrowserRouter>
+            <Switch>
+                <Redirect
+                    exact
+                    from={'/'}
+                    to={'/dashboard'}
+                />
+                <Route
+                    component={Login}
+                    path={'/login'}
+                />
+                <AuthenticatedRoute
+                    component={Dashboard}
+                    onEnter={requireAuthentication}
+                    path={'/dashboard'}
+                />
+                <AuthenticatedRoute
+                    component={Splitwise}
+                    onEnter={requireAuthentication}
+                    path={'/splitwise'}
+                />
+                <Route
+                    component={NotFound}
+                />
+            </Switch>
+        </BrowserRouter>
+        <LoadingIndicator />
+    </>
 );
 
 export default App;

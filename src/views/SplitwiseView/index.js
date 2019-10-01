@@ -20,7 +20,7 @@ const SplitwiseView = (props) => {
 
     makeCall({
         method: CALL_TYPE_GET,
-        URL: `http://localhost:3100/api/splitwise-token?code=${extractedCode}`
+        URL: `/api/splitwise-token?code=${extractedCode}`
     }).then(() => {
         console.group('pushing...');
         history.push('/');

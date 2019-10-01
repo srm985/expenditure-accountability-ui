@@ -19,7 +19,7 @@ class LinkSplitwiseModule extends React.Component {
     componentDidMount() {
         makeCall({
             method: CALL_TYPE_GET,
-            URL: 'http://localhost:3100/api/splitwise-code'
+            URL: '/api/splitwise-code'
         }).then((response) => {
             const {
                 splitwiseAuthorizationURL

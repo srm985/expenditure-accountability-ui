@@ -31,6 +31,8 @@ class LoginView extends React.PureComponent {
         super(props);
 
         this.state = {
+            hasEmptyField: false,
+            hasInvalidCredentials: false,
             isAuthenticated: false,
             password: '',
             user: ''
@@ -52,6 +54,8 @@ class LoginView extends React.PureComponent {
         } = event;
 
         this.setState({
+            hasEmptyField: false,
+            hasInvalidCredentials: false,
             [name]: value
         });
     }
@@ -66,34 +70,44 @@ class LoginView extends React.PureComponent {
 
         event.preventDefault();
 
-        makeCall({
-            method: CALL_TYPE_POST,
-            payload: {
-                password,
-                user
-            },
-            URL: 'http://localhost:3100/api/login'
-        }).then((response) => {
-            const {
-                token
-            } = response;
+        if (!user || !password) {
+            this.setState({
+                hasEmptyField: true
+            });
+        } else {
+            makeCall({
+                method: CALL_TYPE_POST,
+                payload: {
+                    password,
+                    user
+                },
+                URL: '/api/login'
+            }).then((response) => {
+                const {
+                    token
+                } = response;
 
-            // If we receive a valid token, store it.
-            if (token) {
-                authentication.authenticate(token);
+                // If we receive a valid token, store it.
+                if (token) {
+                    authentication.authenticate(token);
 
+                    this.setState({
+                        isAuthenticated: true
+                    });
+                }
+            }).catch(() => {
                 this.setState({
-                    isAuthenticated: true
+                    hasInvalidCredentials: true
                 });
-            }
-        }).catch(() => {
-            // TODO: Handle invalid attempt.
-        });
+            });
+        }
     }
 
     render() {
         const {
             state: {
+                hasEmptyField,
+                hasInvalidCredentials,
                 isAuthenticated,
                 password,
                 user
@@ -130,6 +144,7 @@ class LoginView extends React.PureComponent {
                                         {'Expenditure Accountability'}
                                     </h1>
                                     <form
+                                        className={`${displayName}__form`}
                                         onSubmit={this.handleSubmit}
                                     >
 
@@ -154,6 +169,22 @@ class LoginView extends React.PureComponent {
                                             label={'Log In'}
                                             type={BUTTON_TYPE_SUBMIT}
                                         />
+                                        {
+                                            hasInvalidCredentials
+                                            && (
+                                                <p className={`${displayName}__warning-message`}>
+                                                    {'The email address or password you have entered is invalid.'}
+                                                </p>
+                                            )
+                                        }
+                                        {
+                                            hasEmptyField
+                                            && (
+                                                <p className={`${displayName}__warning-message`}>
+                                                    {'Please ensure all fields have been entered.'}
+                                                </p>
+                                            )
+                                        }
                                     </form>
                                 </section>
                             </GridItem>
