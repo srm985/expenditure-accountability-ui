@@ -9,8 +9,7 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-router": "^5.0.1",
-    "react-router-dom": "^5.0.1",
-    "react-scripts": "^3.1.2"
+    "react-router-dom": "^5.0.1"
   },
   "description": "Application for tracking finances.",
   "devDependencies": {
@@ -89,7 +88,7 @@
     "lint:fix": "eslint ./*.js src/**/*.js scripts/**/*.js .storybook/**/*.js --fix",
     "lint:js": "eslint ./*.js src/**/*.js scripts/**/*.js .storybook/**/*.js",
     "lint:scss": "sass-lint -v -q src/**/*.scss",
-    "start": "react-scripts start",
+    "start": "npm run dev",
     "storybook": "start-storybook -p 6060",
     "storybook:build": "build-storybook -c .storybook -o storybook-dist",
     "update": "npm update --save/--save-dev",
