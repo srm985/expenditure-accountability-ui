@@ -82,8 +82,7 @@
     "url": "git+https://github.com/srm985/expenditure-accountability-ui.git"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production npm run lint --silent && npm run clean && webpack --mode production",
-    "build:static": "npm run lint --silent && npm run clean && webpack --mode production --static_build",
+    "build": "npm run lint --silent && npm run clean && webpack --mode production --static_build",
     "clean": "rimraf dist/**/*",
     "develop": "cross-env NODE_ENV=development concurrently --raw \"npm:lint --silent\" \"webpack-dev-server --open --config ./webpack.config.js --mode development --port 3000\" \"npm:watch --silent\"",
     "lint": "concurrently --raw \"npm:lint:js --silent\" \"npm:lint:scss --silent\"",
