@@ -88,7 +88,7 @@
     "lint:fix": "eslint ./*.js src/**/*.js scripts/**/*.js .storybook/**/*.js --fix",
     "lint:js": "eslint ./*.js src/**/*.js scripts/**/*.js .storybook/**/*.js",
     "lint:scss": "sass-lint -v -q src/**/*.scss",
-    "start": "npm run dev",
+    "start": "npm run develop",
     "storybook": "start-storybook -p 6060",
     "storybook:build": "build-storybook -c .storybook -o storybook-dist",
     "update": "npm update --save/--save-dev",

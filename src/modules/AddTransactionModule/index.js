@@ -16,9 +16,28 @@ class AddTransactionModule extends React.Component {
         this.state = {
             date: '',
             groceryExpense: '',
+            modalKey: Math.random(),
             personalExpense: '',
             sharedExpense: ''
         };
+    }
+
+    componentDidUpdate(previousProps) {
+        const {
+            props: {
+                isAddingTransaction
+            }
+        } = this;
+
+        const {
+            isAddingTransaction: wasAddingTransaction
+        } = previousProps;
+
+        if (!isAddingTransaction && wasAddingTransaction) {
+            this.setState({
+                modalKey: Math.random()
+            });
+        }
     }
 
     handleChange = (event) => {
@@ -60,6 +79,9 @@ class AddTransactionModule extends React.Component {
             props: {
                 handleCancel,
                 isAddingTransaction
+            },
+            state: {
+                modalKey
             }
         } = this;
 
@@ -68,6 +90,7 @@ class AddTransactionModule extends React.Component {
                 handleClickCTASecondary={handleCancel}
                 handleClose={handleCancel}
                 isShown={isAddingTransaction}
+                key={modalKey}
                 labelCTAPrimary={'Submit'}
                 labelCTASecondary={'Cancel'}
                 handleClickCTAPrimary={this.handleSubmit}

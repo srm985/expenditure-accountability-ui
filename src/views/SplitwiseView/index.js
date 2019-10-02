@@ -18,15 +18,16 @@ const SplitwiseView = (props) => {
 
     const extractedCode = queryStrings.replace('?code=', '').replace('&state=', '');
 
-    makeCall({
-        method: CALL_TYPE_GET,
-        URL: `/api/splitwise-token?code=${extractedCode}`
-    }).then(() => {
-        console.group('pushing...');
-        history.push('/');
-    }).catch(() => {
-        // No action needed.
-    });
+    setTimeout(() => {
+        makeCall({
+            method: CALL_TYPE_GET,
+            URL: `/api/splitwise-token?code=${extractedCode}`
+        }).then(() => {
+            history.push('/');
+        }).catch(() => {
+            // No action needed.
+        });
+    }, 0);
 
     return null;
 };
