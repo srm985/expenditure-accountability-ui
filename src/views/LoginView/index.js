@@ -173,7 +173,7 @@ class LoginView extends React.PureComponent {
                                             hasInvalidCredentials
                                             && (
                                                 <p className={`${displayName}__warning-message`}>
-                                                    {'The email address or password you have entered is invalid.'}
+                                                    {'Please enter valid credentials.'}
                                                 </p>
                                             )
                                         }

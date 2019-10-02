@@ -3,12 +3,13 @@ const path = require('path');
 
 module.exports = () => {
     const isDevelopment = process.env.NODE_ENV === 'development';
+    const isStaticBuild = process.argv.includes('--static_build');
 
     const plugins = [];
 
     const entry = './src/index.js';
 
-    if (isDevelopment) {
+    if (isDevelopment || isStaticBuild) {
         plugins.push(new HtmlWebpackPlugin({
             filename: 'index.html',
             path: path.join(__dirname, '../dist/'),

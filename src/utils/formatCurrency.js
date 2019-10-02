@@ -1,3 +1,6 @@
-const formatCurrency = (value) => `$${Number(value).toFixed(2)}`;
+const formatCurrency = (value) => new Intl.NumberFormat('en-US', {
+    currency: 'USD',
+    style: 'currency'
+}).format(value);
 
 export default formatCurrency;

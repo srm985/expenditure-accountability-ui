@@ -21,6 +21,7 @@ const makeCall = (parameters) => new Promise((resolve, reject) => {
     } = window;
 
     const baseURL = origin.replace(/:\d+$/, '');
+    const apiURL = baseURL.includes('localhost') ? `${baseURL}:3100` : 'https://ea-backend.herokuapp.com';
 
     const token = authentication.retrieve();
 
@@ -34,7 +35,7 @@ const makeCall = (parameters) => new Promise((resolve, reject) => {
     loadingIndicator.show();
 
     // We assume our API will be on port 3100.
-    fetch(`${baseURL}:3100${URL}`, {
+    fetch(`${apiURL}${URL}`, {
         body,
         headers,
         method
