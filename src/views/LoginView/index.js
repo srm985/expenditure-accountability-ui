@@ -3,12 +3,8 @@ import {
     Redirect
 } from 'react-router-dom';
 
-import authentication from '../../utils/authentication';
-import makeCall, {
-    CALL_TYPE_POST
-} from '../../utils/restful';
-
 import Button from '../../components/ButtonComponent';
+import Card from '../../components/CardComponent';
 import Grid from '../../components/GridComponent';
 import GridItem from '../../components/GridItemComponent';
 import Input from '../../components/InputComponent';
@@ -20,6 +16,11 @@ import {
     INPUT_TYPE_EMAIL,
     INPUT_TYPE_PASSWORD
 } from '../../components/InputComponent/config';
+
+import authentication from '../../utils/authentication';
+import makeCall, {
+    CALL_TYPE_POST
+} from '../../utils/restful';
 
 import backgroundImage from '../../assets/chicago.jpg';
 
@@ -138,7 +139,7 @@ class LoginView extends React.PureComponent {
                                     ]
                                 }}
                             >
-                                <section>
+                                <Card>
                                     <h1 className={'mb--5'}>
                                         {'Expenditure Accountability'}
                                     </h1>
@@ -185,7 +186,7 @@ class LoginView extends React.PureComponent {
                                             )
                                         }
                                     </form>
-                                </section>
+                                </Card>
                             </GridItem>
                         </Grid>
                     </main>

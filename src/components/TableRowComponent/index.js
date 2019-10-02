@@ -75,7 +75,7 @@ class TableRowComponent extends React.Component {
         } = this;
 
         updateTransaction({
-            date: moment(date).toISOString(),
+            date: moment(date, 'DD.MM.YYYY').toISOString(),
             groceryExpense: parseFloat(groceryExpense.replace('$', '')),
             personalExpense: parseFloat(personalExpense.replace('$', '')),
             sharedExpense: parseFloat(sharedExpense.replace('$', '')),

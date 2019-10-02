@@ -37,8 +37,6 @@
         position: relative;
 
         display: inline-block;
-
-        color: $color-white;
     }
 
     h1 {
@@ -46,11 +44,11 @@
     }
 
     &__warning-message {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: bold;
 
         position: absolute;
-        bottom: -40px;
+        bottom: -25px;
 
         color: $color-red;
     }

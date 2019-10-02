@@ -21,6 +21,8 @@
     &--primary {
         @extend %button;
 
+        text-transform: uppercase;
+
         color: $color-white;
         background-color: $color-blue;
 
@@ -31,6 +33,8 @@
 
     &--secondary {
         @extend %button;
+
+        text-transform: uppercase;
 
         color: $color-blue;
         border: solid 1px $color-blue;

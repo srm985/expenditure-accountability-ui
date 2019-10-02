@@ -18,9 +18,14 @@ import {
     INPUT_TYPE_PASSWORD
 } from '../../components/InputComponent/config';
 
+import authentication from '../../utils/authentication';
 import makeCall, {
     CALL_TYPE_PUT
 } from '../../utils/restful';
+
+import backgroundImage from '../../assets/chicago.jpg';
+
+import './styles.scss';
 
 class EnrollView extends React.Component {
     constructor(props) {
@@ -47,7 +52,7 @@ class EnrollView extends React.Component {
         });
     }
 
-    handleSubmit = () => {
+    handleSubmit = (event) => {
         const {
             props: {
                 history
@@ -60,16 +65,36 @@ class EnrollView extends React.Component {
             }
         } = this;
 
+        const {
+            location: {
+                search: queryStrings
+            }
+        } = window;
+
+        const enrollmentToken = queryStrings.replace('?token=', '');
+
+        event.preventDefault();
+
         makeCall({
             method: CALL_TYPE_PUT,
             payload: {
                 emailAddress,
+                enrollmentToken,
                 firstName,
                 lastName,
                 password
             },
             URL: '/api/enroll'
-        }).then(() => {
+        }).then((response) => {
+            const {
+                token
+            } = response;
+
+            // If we receive a valid token, store it.
+            if (token) {
+                authentication.authenticate(token);
+            }
+
             history.push('/');
         }).catch(() => {
             // Not going to handle invalid enrollment.
@@ -91,7 +116,12 @@ class EnrollView extends React.Component {
         } = EnrollView;
 
         return (
-            <div className={displayName}>
+            <main
+                className={displayName}
+                style={{
+                    backgroundImage: `url('${backgroundImage}')`
+                }}
+            >
                 <Grid>
                     <GridItem
                         columns={{
@@ -102,6 +132,9 @@ class EnrollView extends React.Component {
                         }}
                     >
                         <Card>
+                            <h1 className={'mb--5'}>
+                                {'User Enrollment'}
+                            </h1>
                             <form onSubmit={this.handleSubmit}>
                                 <Input
                                     className={'mb--2'}
@@ -142,7 +175,7 @@ class EnrollView extends React.Component {
                         </Card>
                     </GridItem>
                 </Grid>
-            </div>
+            </main>
         );
     }
 }
