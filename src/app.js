@@ -12,6 +12,7 @@ import Login from './views/LoginView';
 import NotFound from './views/NotFoundView';
 import Splitwise from './views/SplitwiseView';
 
+import Analytics from './components/AnalyticsComponent';
 import AuthenticatedRoute from './components/AuthenticatedRoute';
 import LoadingIndicator from './components/LoadingIndicatorComponent';
 
@@ -22,6 +23,7 @@ import './styles/styles.scss';
 const App = () => (
     <>
         <BrowserRouter>
+            <Route component={Analytics} />
             <Switch>
                 <Redirect
                     exact

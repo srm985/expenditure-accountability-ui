@@ -183,11 +183,13 @@ class EnrollView extends React.Component {
 EnrollView.displayName = 'EnrollView';
 
 EnrollView.propTypes = {
-    history: PropTypes.func
+    history: PropTypes.shape({
+        push: PropTypes.func
+    })
 };
 
 EnrollView.defaultProps = {
-    history: () => { }
+    history: {}
 };
 
 export default withRouter(EnrollView);

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
     withRouter
 } from 'react-router-dom';
@@ -30,6 +31,16 @@ const SplitwiseView = (props) => {
     }, 0);
 
     return null;
+};
+
+SplitwiseView.propTypes = {
+    history: PropTypes.shape({
+        push: PropTypes.func
+    })
+};
+
+SplitwiseView.defaultProps = {
+    history: {}
 };
 
 export default withRouter(SplitwiseView);
