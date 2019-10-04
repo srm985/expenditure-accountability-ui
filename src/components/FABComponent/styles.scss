@@ -2,6 +2,7 @@
 
 .FABComponent {
     position: fixed;
+    z-index: $z-index-fab-button;
     right: 20px;
     bottom: 60px;
 

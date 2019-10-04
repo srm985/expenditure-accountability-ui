@@ -2,7 +2,7 @@
 
 .ModalComponent {
     position: fixed;
-    z-index: 9999;
+    z-index: $z-index-modal;
     top: 0;
     left: 0;
 

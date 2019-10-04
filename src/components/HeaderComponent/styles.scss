@@ -2,7 +2,7 @@
 
 .HeaderComponent {
     position: fixed;
-    z-index: 999;
+    z-index: $z-index-header;
     top: 0;
     left: 0;
 
