@@ -85,6 +85,7 @@ class DashboardView extends React.Component {
     formatCalculatedTransactions = (calculatedTransactions) => {
         const formattedTransactions = calculatedTransactions.map((transaction) => {
             const {
+                calculatedWeeklyExpenditure,
                 date,
                 didExceedWeeklyLimit,
                 groceryExpense,
@@ -93,6 +94,7 @@ class DashboardView extends React.Component {
             } = transaction;
 
             return ({
+                calculatedWeeklyExpenditure,
                 didExceedWeeklyLimit,
                 endDate: moment(date).format('DD.MM.YY'),
                 groceryExpense: formatCurrency(groceryExpense),

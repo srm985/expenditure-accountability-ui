@@ -12,6 +12,8 @@ import {
     withKnobs
 } from '@storybook/addon-knobs';
 
+import '../src/styles/styles.scss';
+
 // This must be first decorator.
 addDecorator(withInfo);
 

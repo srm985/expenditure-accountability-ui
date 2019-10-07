@@ -40,7 +40,7 @@ const ButtonComponent = (props) => {
         }
     );
 
-    const renderLinkType = () => (
+    const renderTypeLink = () => (
         <a
             className={buttonClassNames}
             href={href}
@@ -50,22 +50,26 @@ const ButtonComponent = (props) => {
         </a>
     );
 
+    const renderTypeButton = () => (
+        // eslint-disable-next-line react/button-has-type
+        <button
+            className={buttonClassNames}
+            onClick={handleClick}
+            type={type}
+        >
+            {buttonLabel}
+        </button>
+    );
+
     return (
         <>
             {
                 href
                     ? (
-                        renderLinkType()
+                        renderTypeLink()
                     )
                     : (
-                        // eslint-disable-next-line react/button-has-type
-                        <button
-                            className={buttonClassNames}
-                            onClick={handleClick}
-                            type={type}
-                        >
-                            {buttonLabel}
-                        </button>
+                        renderTypeButton()
                     )
             }
         </>

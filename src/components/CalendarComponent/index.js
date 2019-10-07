@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import MaskedMoney from '../MaskedMoneyComponent';
+
 import classNames from '../../utils/classNames';
 
 import './styles.scss';
@@ -26,6 +28,7 @@ const CalendarComponent = (props) => {
 
     const renderWeek = (weekData) => {
         const {
+            calculatedWeeklyExpenditure,
             didExceedWeeklyLimit,
             endDate,
             startDate
@@ -40,7 +43,10 @@ const CalendarComponent = (props) => {
         );
 
         const weekDays = DAY_ORDER.map((day) => (
-            <div className={`${displayName}__day`}>
+            <div
+                className={`${displayName}__day`}
+                key={day}
+            >
                 <span className={`${displayName}__day-label`}>
                     {day}
                 </span>
@@ -48,13 +54,19 @@ const CalendarComponent = (props) => {
         ));
 
         return (
-            <div className={`${displayName}__week-wrapper`}>
+            <div
+                className={`${displayName}__week-wrapper`}
+                key={startDate}
+            >
                 <div className={`${displayName}__week`}>
                     {weekDays}
                     <div className={weekStatusClassNames}>
-                        <span>
-                            {`${startDate} - ${endDate}`}
-                        </span>
+                        <div className={`${displayName}__week-data`}>
+                            <span>
+                                {`${startDate} - ${endDate}`}
+                            </span>
+                            <MaskedMoney value={calculatedWeeklyExpenditure} />
+                        </div>
                     </div>
                 </div>
             </div>

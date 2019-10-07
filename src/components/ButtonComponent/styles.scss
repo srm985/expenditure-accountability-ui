@@ -3,15 +3,24 @@
 %button {
     font-size: 16px;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     box-sizing: border-box;
     min-width: 120px;
     height: 40px;
     padding: 0 10px;
 
+    text-decoration: none;
+    text-transform: uppercase;
+
     border-radius: 5px;
 }
 
 .ButtonComponent {
+    font-family: $font-stack;
+
     cursor: pointer;
     transition: background-color ease-in-out 0.2s, color ease-in-out 0.2s;
 
@@ -21,28 +30,28 @@
     &--primary {
         @extend %button;
 
-        text-transform: uppercase;
-
         color: $color-white;
         background-color: $color-blue;
 
         &:hover {
-            background-color: darken($color-blue, 10%);
+            @media only screen and (min-width: $breakpoint-medium) {
+                background-color: darken($color-blue, 10%);
+            }
         }
     }
 
     &--secondary {
         @extend %button;
 
-        text-transform: uppercase;
-
         color: $color-blue;
         border: solid 1px $color-blue;
         background-color: transparent;
 
         &:hover {
-            color: $color-white;
-            background-color: $color-blue;
+            @media only screen and (min-width: $breakpoint-medium) {
+                color: $color-white;
+                background-color: $color-blue;
+            }
         }
     }
 

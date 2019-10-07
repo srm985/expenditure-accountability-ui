@@ -15,28 +15,28 @@ const MOCKED_DATA = [
     },
     {
         didExceedWeeklyLimit: false,
-        endDate: '19 Oct 2019',
-        startDate: '12 Oct 2019'
+        endDate: '27 Oct 2019',
+        startDate: '20 Oct 2019'
     },
     {
         didExceedWeeklyLimit: false,
-        endDate: '19 Oct 2019',
-        startDate: '12 Oct 2019'
+        endDate: '3 Nov 2019',
+        startDate: '28 Oct 2019'
     },
     {
         didExceedWeeklyLimit: true,
-        endDate: '19 Oct 2019',
-        startDate: '12 Oct 2019'
+        endDate: '11 Nov 2019',
+        startDate: '4 Nov 2019'
     },
     {
         didExceedWeeklyLimit: true,
-        endDate: '19 Oct 2019',
-        startDate: '12 Oct 2019'
+        endDate: '19 Nov 2019',
+        startDate: '12 Nov 2019'
     },
     {
         didExceedWeeklyLimit: false,
-        endDate: '19 Oct 2019',
-        startDate: '12 Oct 2019'
+        endDate: '27 Nov 2019',
+        startDate: '20 Nov 2019'
     }
 ];
 
