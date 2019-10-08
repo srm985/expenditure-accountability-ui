@@ -11,6 +11,7 @@ import Enroll from './views/EnrollView';
 import Login from './views/LoginView';
 import NotFound from './views/NotFoundView';
 import Splitwise from './views/SplitwiseView';
+import UpdatePassword from './views/UpdatePasswordView';
 
 import Analytics from './components/AnalyticsComponent';
 import AuthenticatedRoute from './components/AuthenticatedRoute';
@@ -37,6 +38,10 @@ const App = () => (
                 <Route
                     component={Login}
                     path={'/login'}
+                />
+                <AuthenticatedRoute
+                    component={UpdatePassword}
+                    path={'/update-password'}
                 />
                 <AuthenticatedRoute
                     component={Dashboard}

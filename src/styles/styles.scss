@@ -30,6 +30,10 @@ p {
     margin: 0;
 }
 
+form {
+    margin: 0;
+}
+
 // Generate margin and padding classes.
 @for $i from 1 through 8 {
     .mt--#{$i} {

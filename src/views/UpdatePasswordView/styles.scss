@@ -1,6 +1,6 @@
 @import '../../styles/constants';
 
-.LoginView {
+.UpdatePasswordView {
     position: fixed;
     top: 0;
     left: 0;
@@ -48,7 +48,7 @@
         font-weight: bold;
 
         position: absolute;
-        bottom: 50px;
+        bottom: 70px;
 
         color: $color-red;
     }
