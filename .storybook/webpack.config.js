@@ -13,5 +13,31 @@ module.exports = async ({
         ]
     });
 
+    config.module.rules = config.module.rules.map(data => {
+        if (/svg\|/.test(String(data.test))) {
+            data.test = /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|cur|ani)(\?.*)?$/;
+        }
+
+        return data;
+    });
+
+    config.module.rules.push({
+        test: /\.(gif|png|jpe?g)$/i,
+        use: [
+            'file-loader',
+            {
+                loader: 'image-webpack-loader',
+                options: {
+                    disable: true
+                }
+            }
+        ]
+    });
+
+    config.module.rules.push({
+        loader: 'svg-inline-loader',
+        test: /\.svg$/
+    });
+
     return config;
 };

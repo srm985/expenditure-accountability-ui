@@ -1,0 +1,68 @@
+@import '../../styles/constants';
+
+%table-cell {
+    box-sizing: border-box;
+    padding-right: 5px;
+
+    &:last-of-type {
+        padding-right: 0;
+    }
+}
+
+.TransactionEntryComponent {
+    display: flex;
+    align-items: center;
+
+    box-sizing: border-box;
+    padding: 4px;
+
+    border-top: solid 1px $color-gray-dark;
+
+    &__date {
+        @extend %table-cell;
+
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+
+        min-width: 50px;
+        height: 100%;
+
+        & > span {
+            &:nth-of-type(1) {
+                font-size: 20px;
+                line-height: 16px;
+            }
+
+            &:nth-of-type(2) {
+                font-size: 14px;
+                line-height: 14px;
+            }
+
+            &:nth-of-type(3) {
+                font-size: 10px;
+                line-height: 10px;
+            }
+        }
+    }
+
+    &__type {
+        @extend %table-cell;
+
+        width: 25px;
+        margin-right: 24px;
+
+        color: $color-blue;
+    }
+
+    &__title {
+        @extend %table-cell;
+
+        font-size: $font-size-regular;
+
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+}

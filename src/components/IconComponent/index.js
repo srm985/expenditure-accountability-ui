@@ -6,12 +6,19 @@ import './styles.scss';
 const IconComponent = (props) => {
     const {
         handleClick,
-        icon
+        icon,
+        isButton
     } = props;
 
     const {
         displayName
     } = IconComponent;
+
+    const buttonAttributes = {
+        onClick: handleClick,
+        role: 'button',
+        tabIndex: 0
+    };
 
     return (
         <div
@@ -23,6 +30,7 @@ const IconComponent = (props) => {
             onClick={handleClick}
             role={'button'}
             tabIndex={0}
+            {...(isButton ? buttonAttributes : {})}
         />
     );
 };
@@ -31,11 +39,13 @@ IconComponent.displayName = 'IconComponent';
 
 IconComponent.propTypes = {
     handleClick: PropTypes.func,
-    icon: PropTypes.string.isRequired
+    icon: PropTypes.string.isRequired,
+    isButton: PropTypes.bool
 };
 
 IconComponent.defaultProps = {
-    handleClick: () => { }
+    handleClick: () => { },
+    isButton: false
 };
 
 export default IconComponent;
