@@ -2,6 +2,7 @@
 
 %button {
     font-size: 16px;
+    line-height: 16px;
 
     display: flex;
     align-items: center;
@@ -65,6 +66,34 @@
 
         color: $color-blue;
         background-color: transparent;
+    }
+
+    &--primary-warning {
+        color: $color-white;
+        background-color: $color-red;
+
+        &:hover {
+            @media only screen and (min-width: $breakpoint-medium) {
+                background-color: darken($color-red, 10%);
+            }
+        }
+    }
+
+    &--secondary-warning {
+        color: $color-red;
+        border: solid 1px $color-red;
+        background-color: transparent;
+
+        &:hover {
+            @media only screen and (min-width: $breakpoint-medium) {
+                color: $color-white;
+                background-color: $color-red;
+            }
+        }
+    }
+
+    &--inline-warning {
+        color: $color-red;
     }
 
     &--full-width {

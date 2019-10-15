@@ -134,3 +134,23 @@ stories.add('link - secondary', () => {
         />
     );
 });
+
+stories.add('button - warnings', () => {
+    const label = text('label', 'Warning');
+
+    const styleTypeList = {};
+
+    BUTTON_STYLE_TYPES.forEach((styleType) => {
+        styleTypeList[styleType] = styleType;
+    });
+
+    const styleType = select('styleType', styleTypeList, BUTTON_STYLE_TYPE_PRIMARY);
+
+    return (
+        <Button
+            isWarning
+            label={label}
+            styleType={styleType}
+        />
+    );
+});

@@ -15,6 +15,7 @@ const InputComponent = (props) => {
         className,
         defaultValue,
         handleChange,
+        isRequired,
         label,
         name,
         placeholder,
@@ -40,6 +41,14 @@ const InputComponent = (props) => {
                 && (
                     <span className={`${displayName}__label`}>
                         {label}
+                        {
+                            isRequired
+                            && (
+                                <span className={`${displayName}__required-indicator`}>
+                                    {'*'}
+                                </span>
+                            )
+                        }
                     </span>
                 )
             }
@@ -50,6 +59,7 @@ const InputComponent = (props) => {
                 name={name}
                 onChange={handleChange}
                 placeholder={placeholder}
+                required={isRequired}
                 type={type}
             />
         </label>
@@ -65,6 +75,7 @@ InputComponent.propTypes = {
         PropTypes.string
     ]),
     handleChange: PropTypes.func,
+    isRequired: PropTypes.bool,
     label: PropTypes.string,
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
@@ -75,6 +86,7 @@ InputComponent.defaultProps = {
     className: '',
     defaultValue: '',
     handleChange: () => { },
+    isRequired: false,
     label: '',
     placeholder: '',
     type: INPUT_TYPE_TEXT

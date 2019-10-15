@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import TableRow from '../TableRowComponent';
+import TransactionEntry from '../TransactionEntryComponent';
 
 import './styles.scss';
 
@@ -31,7 +31,7 @@ const TableComponent = (props) => {
         } = tableRow;
 
         return (
-            <TableRow
+            <TransactionEntry
                 {...passedProps}
                 key={transactionID}
                 rowData={tableRow}

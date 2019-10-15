@@ -1,8 +1,14 @@
 @import '../../styles/constants';
 
 %table-cell {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+
     box-sizing: border-box;
-    padding-right: 5px;
+    height: 100%;
+    padding-right: $planck-length;
 
     &:last-of-type {
         padding-right: 0;
@@ -10,24 +16,28 @@
 }
 
 .TransactionEntryComponent {
+    position: relative;
+    z-index: 1;
+
     display: flex;
     align-items: center;
 
     box-sizing: border-box;
-    padding: 4px;
+    height: 50px;
+    padding: 0 $planck-length;
+
+    cursor: pointer;
 
     border-top: solid 1px $color-gray-dark;
+
+    &--open {
+        box-shadow: 0 5px 5px -5px $color-gray-dark;
+    }
 
     &__date {
         @extend %table-cell;
 
-        display: flex;
-        align-items: flex-start;
-        flex-direction: column;
-        justify-content: center;
-
-        min-width: 50px;
-        height: 100%;
+        flex: 2;
 
         & > span {
             &:nth-of-type(1) {
@@ -50,10 +60,14 @@
     &__type {
         @extend %table-cell;
 
-        width: 25px;
-        margin-right: 24px;
+        flex: 1;
 
         color: $color-blue;
+
+        .IconComponent {
+            width: 100%;
+            max-width: 25px;
+        }
     }
 
     &__title {
@@ -61,8 +75,50 @@
 
         font-size: $font-size-regular;
 
+        flex: 6;
+    }
+
+    &__shared-cost,
+    &__total-cost {
+        @extend %table-cell;
+
+        align-items: flex-end;
+        flex: 4;
+
+        & > span {
+            &:first-of-type {
+                font-size: 10px;
+                line-height: 10px;
+            }
+        }
+    }
+
+    &__drawer {
+        overflow: hidden;
+
+        max-height: 0;
+        padding-right: #{2 * $planck-length};
+        padding-left: #{2 * $planck-length};
+
+        transition: all ease-in-out 0.2s;
+        transform: scaleY(0);
+        transform-origin: top;
+        animation-duration: 0.5s;
+        animation-timing-function: ease-in-out;
+
+        background-color: $color-gray-light;
+
+        &--open {
+            max-height: 1000px;
+            padding-top: #{2 * $planck-length};
+            padding-bottom: #{2 * $planck-length};
+
+            transform: scaleY(1);
+        }
+    }
+
+    &__drawer-buttons {
         display: flex;
-        align-items: center;
-        justify-content: flex-start;
+        justify-content: flex-end;
     }
 }

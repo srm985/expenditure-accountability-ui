@@ -31,14 +31,20 @@ stories.add('default', () => {
         isEditable: boolean('isEditable', true),
         transactionDate: date('transactionDate', defaultDate),
         transactionDescription: text('transactionDescription', transactionDescription),
+        transactionID: '48651563415',
+        transactionSharedCost: number('transactionSharedCost', 123.55),
         transactionTitle: text('transactionTitle', transactionTitle),
-        transactionType: select('transactionType', transactionTypes),
-        transactionValue: number('transactionValue', 123.55)
+        transactionTotalCost: number('transactionTotalCost', 410.52),
+        transactionType: select('transactionType', transactionTypes, TRANSACTION_TYPES[0])
     };
 
     return (
         <TransactionEntryComponent
+            deleteTransaction={(transactionID) => console.log(`deleted ${transactionID}`)}
             rowData={rowData}
+            updateTransaction={(transactionData) => console.log({
+                transactionData
+            })}
         />
     );
 });

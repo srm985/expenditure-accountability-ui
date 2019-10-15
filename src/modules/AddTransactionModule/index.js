@@ -18,8 +18,8 @@ class AddTransactionModule extends React.Component {
             transactionDate: '',
             transactionDescription: '',
             transactionTitle: '',
-            transactionType: '',
-            transactionValue: ''
+            transactionTotalCost: '',
+            transactionType: ''
         };
     }
 
@@ -63,8 +63,8 @@ class AddTransactionModule extends React.Component {
                 transactionDate,
                 transactionDescription,
                 transactionTitle,
-                transactionType,
-                transactionValue
+                transactionTotalCost,
+                transactionType
             }
         } = this;
 
@@ -72,8 +72,8 @@ class AddTransactionModule extends React.Component {
             transactionDate,
             transactionDescription,
             transactionTitle,
-            transactionType,
-            transactionValue
+            transactionTotalCost,
+            transactionType
         });
     }
 
@@ -104,18 +104,23 @@ class AddTransactionModule extends React.Component {
                 <Input
                     className={'mb--2'}
                     handleChange={this.handleChange}
+                    isRequired
+                    label={'Title'}
                     name={'transactionTitle'}
                     placeholder={'transaction title'}
                 />
                 <Input
                     className={'mb--2'}
                     handleChange={this.handleChange}
+                    label={'Description'}
                     name={'transactionDescription'}
                     placeholder={'transaction description'}
                 />
                 <Input
                     className={'mb--2'}
                     handleChange={this.handleChange}
+                    isRequired
+                    label={'Date'}
                     name={'transactionDate'}
                     placeholder={'transaction date'}
                     type={INPUT_TYPE_DATE}
@@ -123,14 +128,18 @@ class AddTransactionModule extends React.Component {
                 <Input
                     className={'mb--2'}
                     handleChange={this.handleChange}
+                    isRequired
+                    label={'Type'}
                     name={'transactionType'}
                     placeholder={'transaction type'}
                 />
                 <Input
                     className={'mb--4'}
                     handleChange={this.handleChange}
-                    name={'transactionValue'}
-                    placeholder={'transaction value'}
+                    isRequired
+                    label={'Total Cost'}
+                    name={'transactionTotalCost'}
+                    placeholder={'transaction total cost'}
                     type={INPUT_TYPE_TEL}
                 />
             </Modal>

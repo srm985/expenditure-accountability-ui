@@ -54,12 +54,6 @@
         justify-content: flex-end;
 
         width: 100%;
-
-        & > button {
-            &:first-of-type {
-                margin-right: 20px;
-            }
-        }
     }
 
     &__close-button {

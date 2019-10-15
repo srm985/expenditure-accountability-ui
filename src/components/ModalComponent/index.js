@@ -20,6 +20,8 @@ const ModalComponent = (props) => {
         handleClickCTASecondary,
         handleClose,
         isShown,
+        isWarningCTAPrimary,
+        isWarningCTASecondary,
         labelCTAPrimary,
         labelCTASecondary
     } = props;
@@ -53,16 +55,24 @@ const ModalComponent = (props) => {
                 <div className={`${displayName}__footer`}>
                     <Button
                         handleClick={handleClickCTAPrimary}
+                        isWarning={isWarningCTAPrimary}
                         label={labelCTAPrimary}
                         styleType={BUTTON_STYLE_TYPE_PRIMARY}
                         type={BUTTON_TYPE_BUTTON}
                     />
-                    <Button
-                        handleClick={handleClickCTASecondary}
-                        label={labelCTASecondary}
-                        styleType={BUTTON_STYLE_TYPE_SECONDARY}
-                        type={BUTTON_TYPE_BUTTON}
-                    />
+                    {
+                        labelCTASecondary
+                        && (
+                            <Button
+                                className={'ml--2'}
+                                handleClick={handleClickCTASecondary}
+                                isWarning={isWarningCTASecondary}
+                                label={labelCTASecondary}
+                                styleType={BUTTON_STYLE_TYPE_SECONDARY}
+                                type={BUTTON_TYPE_BUTTON}
+                            />
+                        )
+                    }
                 </div>
             </div>
         </div>
@@ -77,6 +87,8 @@ ModalComponent.propTypes = {
     handleClickCTASecondary: PropTypes.func,
     handleClose: PropTypes.func,
     isShown: PropTypes.bool,
+    isWarningCTAPrimary: PropTypes.bool,
+    isWarningCTASecondary: PropTypes.bool,
     labelCTAPrimary: PropTypes.string,
     labelCTASecondary: PropTypes.string
 };
@@ -87,6 +99,8 @@ ModalComponent.defaultProps = {
     handleClickCTASecondary: () => { },
     handleClose: () => { },
     isShown: true,
+    isWarningCTAPrimary: false,
+    isWarningCTASecondary: false,
     labelCTAPrimary: '',
     labelCTASecondary: ''
 };
