@@ -14,11 +14,12 @@ class AddTransactionModule extends React.Component {
         super(props);
 
         this.state = {
-            date: '',
-            groceryExpense: '',
             modalKey: Math.random(),
-            personalExpense: '',
-            sharedExpense: ''
+            transactionDate: '',
+            transactionDescription: '',
+            transactionTitle: '',
+            transactionType: '',
+            transactionValue: ''
         };
     }
 
@@ -59,18 +60,20 @@ class AddTransactionModule extends React.Component {
                 handleSubmit
             },
             state: {
-                date,
-                groceryExpense,
-                personalExpense,
-                sharedExpense
+                transactionDate,
+                transactionDescription,
+                transactionTitle,
+                transactionType,
+                transactionValue
             }
         } = this;
 
         handleSubmit({
-            date,
-            groceryExpense,
-            personalExpense,
-            sharedExpense
+            transactionDate,
+            transactionDescription,
+            transactionTitle,
+            transactionType,
+            transactionValue
         });
     }
 
@@ -101,29 +104,33 @@ class AddTransactionModule extends React.Component {
                 <Input
                     className={'mb--2'}
                     handleChange={this.handleChange}
-                    name={'date'}
-                    placeholder={'date'}
+                    name={'transactionTitle'}
+                    placeholder={'transaction title'}
+                />
+                <Input
+                    className={'mb--2'}
+                    handleChange={this.handleChange}
+                    name={'transactionDescription'}
+                    placeholder={'transaction description'}
+                />
+                <Input
+                    className={'mb--2'}
+                    handleChange={this.handleChange}
+                    name={'transactionDate'}
+                    placeholder={'transaction date'}
                     type={INPUT_TYPE_DATE}
                 />
                 <Input
                     className={'mb--2'}
                     handleChange={this.handleChange}
-                    name={'personalExpense'}
-                    placeholder={'personal expense'}
-                    type={INPUT_TYPE_TEL}
-                />
-                <Input
-                    className={'mb--2'}
-                    handleChange={this.handleChange}
-                    name={'sharedExpense'}
-                    placeholder={'shared expense'}
-                    type={INPUT_TYPE_TEL}
+                    name={'transactionType'}
+                    placeholder={'transaction type'}
                 />
                 <Input
                     className={'mb--4'}
                     handleChange={this.handleChange}
-                    name={'groceryExpense'}
-                    placeholder={'grocery expense'}
+                    name={'transactionValue'}
+                    placeholder={'transaction value'}
                     type={INPUT_TYPE_TEL}
                 />
             </Modal>
