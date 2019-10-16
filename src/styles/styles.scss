@@ -12,7 +12,7 @@ body {
     max-width: 100%;
     min-height: 100vh;
     margin: 0;
-    padding: #{$header-height + 20} 15px 60px;
+    padding: #{$header-height + (2 * $planck-length)} #{2 * $planck-length} #{$footer-height + (4 * $planck-length)};
 
     color: $color-black;
     background-color: $color-gray-light;

@@ -24,12 +24,14 @@
         align-items: center;
 
         box-sizing: border-box;
-        height: 50px;
-        padding: 0 $planck-length;
-
-        cursor: pointer;
+        min-height: 50px;
+        padding: #{$planck-length / 2} $planck-length;
 
         background-color: $color-white;
+
+        &--editable {
+            cursor: pointer;
+        }
 
         &--open {
             box-shadow: 0 5px 5px -5px $color-gray-dark;
@@ -76,14 +78,13 @@
 
             &:nth-of-type(2) {
                 position: absolute;
-                bottom: $planck-length;
+                bottom: 0;
                 left: #{2 * $planck-length};
 
                 width: 100%;
                 max-width: #{1.5 * $planck-length};
 
                 @media only screen and (min-width: $breakpoint-small) {
-                    bottom: $planck-length;
                     left: #{2 * $planck-length};
 
                     width: 100%;
@@ -102,6 +103,8 @@
 
         @media only screen and (min-width: $breakpoint-small) {
             font-size: $font-size-regular;
+
+            flex: 7;
         }
     }
 
@@ -117,6 +120,14 @@
                 font-size: 10px;
                 line-height: 10px;
             }
+
+            &:last-of-type {
+                font-size: $font-size-small;
+
+                @media only screen and (min-width: $breakpoint-small) {
+                    font-size: $font-size-regular;
+                }
+            }
         }
     }
 
@@ -128,6 +139,7 @@
         padding-left: #{2 * $planck-length};
 
         transition: all ease-in-out 0.2s; // sass-lint:disable-line no-transition-all
+
         transform: scaleY(1px);
         transform-origin: top;
         animation-duration: 0.5s;
@@ -153,6 +165,27 @@
 
     &__drawer-buttons {
         display: flex;
-        justify-content: flex-end;
+        flex-direction: column;
+
+        // TODO: Correct in generated classes.
+        .ButtonComponent {
+            &:first-of-type {
+                margin-right: 0;
+                margin-bottom: #{2 * $planck-length};
+            }
+        }
+
+        @media only screen and (min-width: $breakpoint-small) {
+            flex-direction: row;
+            justify-content: flex-end;
+
+            // TODO: Correct in generated classes.
+            .ButtonComponent {
+                &:first-of-type {
+                    margin-right: #{2 * $planck-length};
+                    margin-bottom: 0;
+                }
+            }
+        }
     }
 }

@@ -1,9 +1,0 @@
-export const TRANSACTION_TYPE_GROCERY = 'grocery';
-export const TRANSACTION_TYPE_PERSONAL = 'personal';
-export const TRANSACTION_TYPE_SHARED = 'shared';
-
-export const TRANSACTION_TYPES = [
-    TRANSACTION_TYPE_GROCERY,
-    TRANSACTION_TYPE_PERSONAL,
-    TRANSACTION_TYPE_SHARED
-];

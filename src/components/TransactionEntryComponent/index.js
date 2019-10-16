@@ -6,6 +6,7 @@ import Button from '../ButtonComponent';
 import Icon from '../IconComponent';
 import Input from '../InputComponent';
 import Modal from '../ModalComponent';
+import Select from '../SelectComponent';
 
 import {
     BUTTON_STYLE_TYPE_SECONDARY,
@@ -28,11 +29,12 @@ import {
 } from '../../assets/icons';
 
 import {
-    TRANSACTION_TYPES,
     TRANSACTION_TYPE_GROCERY,
+    TRANSACTION_TYPE_LABELS,
     TRANSACTION_TYPE_PERSONAL,
-    TRANSACTION_TYPE_SHARED
-} from './config';
+    TRANSACTION_TYPE_SHARED,
+    TRANSACTION_TYPES
+} from '../../constants';
 
 import './styles.scss';
 
@@ -276,7 +278,10 @@ class TransactionEntryComponent extends React.Component {
     renderDrawer = () => {
         const {
             props: {
-                isLastEntry
+                isLastEntry,
+                rowData: {
+                    isEditable
+                }
             },
             state: {
                 formKey,
@@ -293,6 +298,17 @@ class TransactionEntryComponent extends React.Component {
             displayName
         } = TransactionEntryComponent;
 
+        const transactionTypeOptions = TRANSACTION_TYPES.map((transactionTypeOption) => {
+            const {
+                [transactionTypeOption]: label
+            } = TRANSACTION_TYPE_LABELS;
+
+            return ({
+                label,
+                value: transactionTypeOption
+            });
+        });
+
         const drawerClassNames = classNames(
             `${displayName}__drawer`,
             {
@@ -303,70 +319,75 @@ class TransactionEntryComponent extends React.Component {
 
         return (
             <div className={drawerClassNames}>
-                <form
-                    key={formKey}
-                    onSubmit={this.handleSave}
-                >
-                    <Input
-                        className={'mb--2'}
-                        defaultValue={transactionTitle}
-                        handleChange={this.handleChange}
-                        isRequired
-                        label={'Title'}
-                        name={'transactionTitle'}
-                        placeholder={'transaction title'}
-                    />
-                    <Input
-                        className={'mb--2'}
-                        defaultValue={transactionDescription}
-                        handleChange={this.handleChange}
-                        label={'Description'}
-                        name={'transactionDescription'}
-                        placeholder={'transaction description'}
-                    />
-                    <Input
-                        className={'mb--2'}
-                        defaultValue={transactionDate}
-                        handleChange={this.handleChange}
-                        isRequired
-                        label={'Date'}
-                        name={'transactionDate'}
-                        placeholder={'transaction date'}
-                        type={INPUT_TYPE_DATE}
-                    />
-                    <Input
-                        className={'mb--2'}
-                        defaultValue={transactionType}
-                        handleChange={this.handleChange}
-                        isRequired
-                        label={'Type'}
-                        name={'transactionType'}
-                        placeholder={'transaction type'}
-                    />
-                    <Input
-                        className={'mb--4'}
-                        defaultValue={transactionTotalCost}
-                        handleChange={this.handleChange}
-                        isRequired
-                        label={'Total Cost'}
-                        name={'transactionTotalCost'}
-                        placeholder={'transaction total cost'}
-                        type={INPUT_TYPE_TEL}
-                    />
-                    <div className={`${displayName}__drawer-buttons`}>
-                        <Button
-                            className={'mr--2'}
-                            label={'Save'}
-                            type={BUTTON_TYPE_SUBMIT}
-                        />
-                        <Button
-                            handleClick={this.toggleDeleteConfirmationModal}
-                            isWarning
-                            label={'Delete'}
-                            styleType={BUTTON_STYLE_TYPE_SECONDARY}
-                        />
-                    </div>
-                </form>
+                {
+                    isEditable
+                    && (
+                        <form
+                            key={formKey}
+                            onSubmit={this.handleSave}
+                        >
+                            <Input
+                                className={'mb--2'}
+                                defaultValue={transactionTitle}
+                                handleChange={this.handleChange}
+                                isRequired
+                                label={'Title'}
+                                name={'transactionTitle'}
+                                placeholder={'transaction title'}
+                            />
+                            <Input
+                                className={'mb--2'}
+                                defaultValue={transactionDescription}
+                                handleChange={this.handleChange}
+                                label={'Description'}
+                                name={'transactionDescription'}
+                                placeholder={'transaction description'}
+                            />
+                            <Input
+                                className={'mb--2'}
+                                defaultValue={transactionDate}
+                                handleChange={this.handleChange}
+                                isRequired
+                                label={'Date'}
+                                name={'transactionDate'}
+                                placeholder={'transaction date'}
+                                type={INPUT_TYPE_DATE}
+                            />
+                            <Select
+                                className={'mb--2'}
+                                defaultValue={transactionType}
+                                handleChange={this.handleChange}
+                                isRequired
+                                label={'Type'}
+                                name={'transactionType'}
+                                options={transactionTypeOptions}
+                            />
+                            <Input
+                                className={'mb--4'}
+                                defaultValue={transactionTotalCost}
+                                handleChange={this.handleChange}
+                                isRequired
+                                label={'Total Cost'}
+                                name={'transactionTotalCost'}
+                                placeholder={'transaction total cost'}
+                                type={INPUT_TYPE_TEL}
+                            />
+                            <div className={`${displayName}__drawer-buttons`}>
+                                <Button
+                                    className={'mr--2'}
+                                    label={'Save'}
+                                    type={BUTTON_TYPE_SUBMIT}
+                                />
+                                <Button
+                                    handleClick={this.toggleDeleteConfirmationModal}
+                                    isWarning
+                                    label={'Delete'}
+                                    styleType={BUTTON_STYLE_TYPE_SECONDARY}
+                                />
+                            </div>
+                        </form>
+                    )
+                }
             </div>
         );
     }
@@ -374,7 +395,10 @@ class TransactionEntryComponent extends React.Component {
     render() {
         const {
             props: {
-                className
+                className,
+                rowData: {
+                    isEditable
+                }
             },
             state: {
                 isDrawerOpen,
@@ -397,6 +421,7 @@ class TransactionEntryComponent extends React.Component {
         const rowClassNames = classNames(
             `${displayName}__row`,
             {
+                [`${displayName}__row--editable`]: isEditable,
                 [`${displayName}__row--open`]: isDrawerOpen
             }
         );
@@ -406,7 +431,7 @@ class TransactionEntryComponent extends React.Component {
                 <li className={componentClassNames}>
                     <div
                         className={rowClassNames}
-                        onClick={this.toggleDrawer}
+                        onClick={isEditable ? this.toggleDrawer : () => { }}
                     >
                         {this.renderDate()}
                         {this.renderTransactionType()}

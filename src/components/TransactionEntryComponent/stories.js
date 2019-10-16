@@ -14,7 +14,7 @@ import TransactionEntryComponent from './index';
 
 import {
     TRANSACTION_TYPES
-} from './config';
+} from '../../constants';
 
 const stories = storiesOf(TransactionEntryComponent.displayName, module);
 

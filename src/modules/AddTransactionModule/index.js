@@ -3,11 +3,17 @@ import React from 'react';
 
 import Input from '../../components/InputComponent';
 import Modal from '../../components/ModalComponent';
+import Select from '../../components/SelectComponent';
 
 import {
     INPUT_TYPE_DATE,
     INPUT_TYPE_TEL
 } from '../../components/InputComponent/config';
+
+import {
+    TRANSACTION_TYPE_LABELS,
+    TRANSACTION_TYPES
+} from '../../constants';
 
 class AddTransactionModule extends React.Component {
     constructor(props) {
@@ -88,6 +94,17 @@ class AddTransactionModule extends React.Component {
             }
         } = this;
 
+        const transactionTypeOptions = TRANSACTION_TYPES.map((transactionTypeOption) => {
+            const {
+                [transactionTypeOption]: label
+            } = TRANSACTION_TYPE_LABELS;
+
+            return ({
+                label,
+                value: transactionTypeOption
+            });
+        });
+
         return (
             <Modal
                 handleClickCTASecondary={handleCancel}
@@ -125,13 +142,13 @@ class AddTransactionModule extends React.Component {
                     placeholder={'transaction date'}
                     type={INPUT_TYPE_DATE}
                 />
-                <Input
+                <Select
                     className={'mb--2'}
                     handleChange={this.handleChange}
                     isRequired
                     label={'Type'}
                     name={'transactionType'}
-                    placeholder={'transaction type'}
+                    options={transactionTypeOptions}
                 />
                 <Input
                     className={'mb--4'}

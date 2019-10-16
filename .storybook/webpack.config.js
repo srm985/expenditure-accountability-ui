@@ -13,6 +13,7 @@ module.exports = async ({
         ]
     });
 
+    // eslint-disable-next-line no-param-reassign
     config.module.rules = config.module.rules.map((data) => {
         const {
             test: currentTest

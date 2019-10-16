@@ -28,7 +28,7 @@ const SelectComponent = (props) => {
 
         return (
             <option
-                selected={optionValue === defaultValue}
+                key={optionValue}
                 value={optionValue}
             >
                 {optionLabel}
@@ -64,7 +64,11 @@ const SelectComponent = (props) => {
             }
             <select
                 className={`${displayName}__select`}
+                id={name}
+                name={name}
                 onChange={handleChange}
+                required={isRequired}
+                value={defaultValue}
             >
                 {generatedOptions}
             </select>
