@@ -16,15 +16,6 @@ const TableComponent = (props) => {
         displayName
     } = TableComponent;
 
-    const tableHeaders = tableHeaderList.map((tableHeader) => (
-        <span
-            className={`${displayName}__header-column`}
-            key={tableHeader}
-        >
-            {tableHeader}
-        </span>
-    ));
-
     const tableRows = tableDataList.map((tableRow) => {
         const {
             transactionID
@@ -41,9 +32,6 @@ const TableComponent = (props) => {
 
     return (
         <ul className={displayName}>
-            <li className={`${displayName}__header`}>
-                {tableHeaders}
-            </li>
             {tableRows}
         </ul>
     );

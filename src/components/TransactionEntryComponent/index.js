@@ -21,16 +21,19 @@ import classNames from '../../utils/classNames';
 import formatCurrency from '../../utils/formatCurrency';
 
 import {
-    save
+    cart,
+    personal,
+    share
 } from '../../assets/icons';
 
-import './styles.scss';
+import {
+    TRANSACTION_TYPES,
+    TRANSACTION_TYPE_GROCERY,
+    TRANSACTION_TYPE_PERSONAL,
+    TRANSACTION_TYPE_SHARED
+} from './config';
 
-export const TRANSACTION_TYPES = [
-    'grocery',
-    'personal',
-    'shared'
-];
+import './styles.scss';
 
 class TransactionEntryComponent extends React.Component {
     constructor(props) {
@@ -187,9 +190,29 @@ class TransactionEntryComponent extends React.Component {
             displayName
         } = TransactionEntryComponent;
 
+        let icon;
+
+        switch (transactionType) {
+            case TRANSACTION_TYPE_GROCERY:
+                icon = cart;
+                break;
+
+            case TRANSACTION_TYPE_PERSONAL:
+                icon = personal;
+                break;
+
+            case TRANSACTION_TYPE_SHARED:
+                icon = share;
+                break;
+
+            default:
+                icon = '';
+                break;
+        }
+
         return (
             <div className={`${displayName}__type`}>
-                <Icon icon={save} />
+                <Icon icon={icon} />
             </div>
         );
     }
@@ -359,18 +382,27 @@ class TransactionEntryComponent extends React.Component {
             }
         );
 
+        const rowClassNames = classNames(
+            `${displayName}__row`,
+            {
+                [`${displayName}__row--open`]: isDrawerOpen
+            }
+        );
+
         return (
             <>
-                <li
-                    className={componentClassNames}
-                    onClick={this.toggleDrawer}
-                >
-                    {this.renderDate()}
-                    {this.renderTransactionType()}
-                    {this.renderTitle()}
-                    {this.renderExpense()}
+                <li className={componentClassNames}>
+                    <div
+                        className={rowClassNames}
+                        onClick={this.toggleDrawer}
+                    >
+                        {this.renderDate()}
+                        {this.renderTransactionType()}
+                        {this.renderTitle()}
+                        {this.renderExpense()}
+                    </div>
+                    {this.renderDrawer()}
                 </li>
-                {this.renderDrawer()}
                 <Modal
                     handleClickCTAPrimary={this.handleDelete}
                     handleClickCTASecondary={this.toggleDeleteConfirmationModal}

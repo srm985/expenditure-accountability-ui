@@ -10,9 +10,11 @@ import {
     text
 } from '@storybook/addon-knobs';
 
-import TransactionEntryComponent, {
+import TransactionEntryComponent from './index';
+
+import {
     TRANSACTION_TYPES
-} from './index';
+} from './config';
 
 const stories = storiesOf(TransactionEntryComponent.displayName, module);
 
@@ -39,12 +41,20 @@ stories.add('default', () => {
     };
 
     return (
-        <TransactionEntryComponent
-            deleteTransaction={(transactionID) => console.log(`deleted ${transactionID}`)}
-            rowData={rowData}
-            updateTransaction={(transactionData) => console.log({
-                transactionData
-            })}
-        />
+        <ul
+            style={{
+                listStyle: 'none',
+                margin: '0',
+                padding: '0'
+            }}
+        >
+            <TransactionEntryComponent
+                deleteTransaction={(transactionID) => console.log(`deleted ${transactionID}`)}
+                rowData={rowData}
+                updateTransaction={(transactionData) => console.log({
+                    transactionData
+                })}
+            />
+        </ul>
     );
 });

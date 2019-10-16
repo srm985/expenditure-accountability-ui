@@ -5,24 +5,4 @@
     padding: 0;
 
     list-style: none;
-
-    &__header {
-        padding: 0 10px;
-    }
-
-    &__header-column {
-        font-size: 14px;
-
-        display: inline-block;
-
-        width: 25%;
-
-        text-align: right;
-
-        &:first-of-type {
-            width: 15%;
-
-            text-align: left;
-        }
-    }
 }
