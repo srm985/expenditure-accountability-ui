@@ -1,6 +1,8 @@
 @import '../../styles/constants';
 
 .CardComponent {
+    overflow: hidden;
+
     box-sizing: border-box;
     width: 100%;
     min-height: 200px;

@@ -16,14 +16,17 @@ const TableComponent = (props) => {
         displayName
     } = TableComponent;
 
-    const tableRows = tableDataList.map((tableRow) => {
+    const tableRows = tableDataList.map((tableRow, index) => {
         const {
             transactionID
         } = tableRow;
 
+        const isLastEntry = index === tableDataList.length - 1;
+
         return (
             <TransactionEntry
                 {...passedProps}
+                isLastEntry={isLastEntry}
                 key={transactionID}
                 rowData={tableRow}
             />

@@ -4,6 +4,23 @@
         "jest": true
     },
     "extends": "airbnb",
+    "overrides": [
+        {
+            "files": [
+                "scripts/**/*.js",
+                "src/**/*stories.js"
+
+            ],
+            "rules": {
+                "no-alert": [
+                    0
+                ],
+                "no-console": [
+                    0
+                ]
+            }
+        }
+    ],
     "parser": "babel-eslint",
     "rules": {
         "array-bracket-newline": [

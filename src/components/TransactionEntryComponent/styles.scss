@@ -62,26 +62,50 @@
     &__type {
         @extend %table-cell;
 
-        flex: 1;
+        position: relative;
+
+        flex: 2;
 
         .IconComponent {
-            width: 100%;
-            max-width: 30px;
+            &:first-of-type {
+                width: 100%;
+                max-width: 30px;
 
-            color: $color-blue;
+                color: $color-blue;
+            }
+
+            &:nth-of-type(2) {
+                position: absolute;
+                bottom: $planck-length;
+                left: #{2 * $planck-length};
+
+                width: 100%;
+                max-width: #{1.5 * $planck-length};
+
+                @media only screen and (min-width: $breakpoint-small) {
+                    bottom: $planck-length;
+                    left: #{2 * $planck-length};
+
+                    width: 100%;
+                    max-width: #{2 * $planck-length};
+                }
+            }
         }
     }
 
     &__title {
         @extend %table-cell;
 
-        font-size: $font-size-regular;
+        font-size: $font-size-small;
 
         flex: 6;
+
+        @media only screen and (min-width: $breakpoint-small) {
+            font-size: $font-size-regular;
+        }
     }
 
-    &__shared-cost
-    ,
+    &__shared-cost,
     &__total-cost {
         @extend %table-cell;
 
@@ -103,7 +127,7 @@
         padding-right: #{2 * $planck-length};
         padding-left: #{2 * $planck-length};
 
-        transition: all ease-in-out 0.2s;
+        transition: all ease-in-out 0.2s; // sass-lint:disable-line no-transition-all
         transform: scaleY(1px);
         transform-origin: top;
         animation-duration: 0.5s;
@@ -119,6 +143,11 @@
             padding-bottom: #{2 * $planck-length};
 
             transform: scaleY(1);
+        }
+
+        &--last {
+            border: none;
+            box-shadow: none;
         }
     }
 

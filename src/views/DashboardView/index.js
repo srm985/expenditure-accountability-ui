@@ -54,34 +54,6 @@ class DashboardView extends React.Component {
         });
     }
 
-    formatEnteredTransactions = (enteredTransactions) => {
-        const formattedTransactions = enteredTransactions.map((transaction) => {
-            const {
-                date,
-                groceryExpense,
-                isEditable,
-                personalExpense,
-                sharedExpense,
-                transactionID
-            } = transaction;
-
-            /* eslint-disable sort-keys */
-            return ({
-                transactionID,
-                isEditable,
-                date: moment(date).format('DD.MM.YY'),
-                personalExpense: formatCurrency(personalExpense),
-                sharedExpense: formatCurrency(sharedExpense),
-                groceryExpense: formatCurrency(groceryExpense)
-            });
-            /* eslint-enable sort-keys */
-        });
-
-        this.setState({
-            enteredTransactions: formattedTransactions
-        });
-    }
-
     formatCalculatedTransactions = (calculatedTransactions) => {
         const formattedTransactions = calculatedTransactions.map((transaction) => {
             const {
@@ -113,8 +85,12 @@ class DashboardView extends React.Component {
         makeCall({
             method: CALL_TYPE_GET,
             URL: '/api/retrieve-transactions'
-        }).then((response) => {
-            this.formatEnteredTransactions(response);
+        }).then((transactionList = []) => {
+            const clonedTransactionList = JSON.parse(JSON.stringify(transactionList));
+
+            this.setState({
+                enteredTransactions: clonedTransactionList
+            });
         }).catch(() => {
             // No action required.
         });
@@ -304,8 +280,8 @@ class DashboardView extends React.Component {
                         <GridItem
                             columns={{
                                 large: [
-                                    1,
-                                    13
+                                    3,
+                                    11
                                 ]
                             }}
                         >

@@ -4,6 +4,7 @@
     "url": "https://github.com/srm985/expenditure-accountability-ui/issues"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "history": "^4.10.1",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
@@ -95,7 +96,7 @@
     "lint:js": "eslint ./*.js src/**/*.js scripts/**/*.js .storybook/**/*.js",
     "lint:scss": "sass-lint -v -q src/**/*.scss",
     "start": "npm run develop",
-    "storybook": "start-storybook -p 6060",
+    "storybook": "concurrently --raw \"start-storybook -p 6060\" \"npm:watch\"",
     "storybook:build": "build-storybook -c .storybook -o storybook-dist",
     "update": "npm update --save/--save-dev",
     "watch": "concurrently --raw \"npm:watch:js --silent\" \"npm:watch:scss --silent\"",

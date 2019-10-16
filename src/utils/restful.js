@@ -34,7 +34,6 @@ const makeCall = (parameters) => new Promise((resolve, reject) => {
 
     loadingIndicator.show();
 
-    // We assume our API will be on port 3100.
     fetch(`${apiURL}${URL}`, {
         body,
         headers,

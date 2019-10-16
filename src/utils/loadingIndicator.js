@@ -1,5 +1,7 @@
 import LoadingIndicator from '../components/LoadingIndicatorComponent';
 
+let pendingSpinnerCount = 0;
+
 const loadingIndicator = {
     hide: () => {
         const {
@@ -8,7 +10,11 @@ const loadingIndicator = {
 
         const loadingIndicatorElement = document.getElementsByClassName(displayName)[0];
 
-        loadingIndicatorElement.classList.remove(`${displayName}--visible`);
+        if (pendingSpinnerCount <= 1) {
+            loadingIndicatorElement.classList.remove(`${displayName}--visible`);
+        }
+
+        pendingSpinnerCount -= 1;
     },
 
     show: () => {
@@ -18,7 +24,11 @@ const loadingIndicator = {
 
         const loadingIndicatorElement = document.getElementsByClassName(displayName)[0];
 
-        loadingIndicatorElement.classList.add(`${displayName}--visible`);
+        if (pendingSpinnerCount === 0) {
+            loadingIndicatorElement.classList.add(`${displayName}--visible`);
+        }
+
+        pendingSpinnerCount += 1;
     }
 };
 

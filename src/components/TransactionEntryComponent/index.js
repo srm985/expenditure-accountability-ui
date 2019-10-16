@@ -23,7 +23,8 @@ import formatCurrency from '../../utils/formatCurrency';
 import {
     cart,
     personal,
-    share
+    share,
+    splitwise
 } from '../../assets/icons';
 
 import {
@@ -181,6 +182,7 @@ class TransactionEntryComponent extends React.Component {
         const {
             props: {
                 rowData: {
+                    isSplitwiseTransaction,
                     transactionType
                 }
             }
@@ -213,6 +215,12 @@ class TransactionEntryComponent extends React.Component {
         return (
             <div className={`${displayName}__type`}>
                 <Icon icon={icon} />
+                {
+                    isSplitwiseTransaction
+                    && (
+                        <Icon icon={splitwise} />
+                    )
+                }
             </div>
         );
     }
@@ -267,6 +275,9 @@ class TransactionEntryComponent extends React.Component {
 
     renderDrawer = () => {
         const {
+            props: {
+                isLastEntry
+            },
             state: {
                 formKey,
                 isDrawerOpen,
@@ -285,6 +296,7 @@ class TransactionEntryComponent extends React.Component {
         const drawerClassNames = classNames(
             `${displayName}__drawer`,
             {
+                [`${displayName}__drawer--last`]: isLastEntry,
                 [`${displayName}__drawer--open`]: isDrawerOpen
             }
         );
@@ -429,8 +441,10 @@ TransactionEntryComponent.displayName = 'TransactionEntryComponent';
 TransactionEntryComponent.propTypes = {
     className: PropTypes.string,
     deleteTransaction: PropTypes.func,
+    isLastEntry: PropTypes.bool,
     rowData: PropTypes.shape({
         isEditable: PropTypes.bool,
+        isSplitwiseTransaction: PropTypes.bool,
         transactionDate: PropTypes.oneOfType([
             PropTypes.number,
             PropTypes.string
@@ -448,6 +462,7 @@ TransactionEntryComponent.propTypes = {
 TransactionEntryComponent.defaultProps = {
     className: '',
     deleteTransaction: () => { },
+    isLastEntry: true,
     rowData: {},
     updateTransaction: () => { }
 };
