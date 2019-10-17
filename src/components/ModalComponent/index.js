@@ -5,8 +5,9 @@ import Button from '../ButtonComponent';
 
 import {
     BUTTON_STYLE_TYPE_PRIMARY,
+    BUTTON_STYLE_TYPE_SECONDARY,
     BUTTON_TYPE_BUTTON,
-    BUTTON_STYLE_TYPE_SECONDARY
+    BUTTON_TYPE_SUBMIT
 } from '../ButtonComponent/config';
 
 import classNames from '../../utils/classNames';
@@ -26,6 +27,12 @@ const ModalComponent = (props) => {
         labelCTASecondary
     } = props;
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        handleClickCTAPrimary();
+    };
+
     const {
         displayName
     } = ModalComponent;
@@ -41,39 +48,40 @@ const ModalComponent = (props) => {
         <div className={componentClassNames}>
             <div className={`${displayName}__backdrop`} />
             <div className={`${displayName}__modal`}>
-                <div
-                    className={`${displayName}__close-button`}
-                    onClick={handleClose}
-                    role={'button'}
-                    tabIndex={'0'}
-                >
-                    <div />
-                </div>
-                <div className={`${displayName}__body`}>
-                    {children}
-                </div>
-                <div className={`${displayName}__footer`}>
-                    <Button
-                        handleClick={handleClickCTAPrimary}
-                        isWarning={isWarningCTAPrimary}
-                        label={labelCTAPrimary}
-                        styleType={BUTTON_STYLE_TYPE_PRIMARY}
-                        type={BUTTON_TYPE_BUTTON}
-                    />
-                    {
-                        labelCTASecondary
-                        && (
-                            <Button
-                                className={'ml--2'}
-                                handleClick={handleClickCTASecondary}
-                                isWarning={isWarningCTASecondary}
-                                label={labelCTASecondary}
-                                styleType={BUTTON_STYLE_TYPE_SECONDARY}
-                                type={BUTTON_TYPE_BUTTON}
-                            />
-                        )
-                    }
-                </div>
+                <form onSubmit={handleSubmit}>
+                    <div
+                        className={`${displayName}__close-button`}
+                        onClick={handleClose}
+                        role={'button'}
+                        tabIndex={'0'}
+                    >
+                        <div />
+                    </div>
+                    <div className={`${displayName}__body`}>
+                        {children}
+                    </div>
+                    <div className={`${displayName}__footer`}>
+                        <Button
+                            isWarning={isWarningCTAPrimary}
+                            label={labelCTAPrimary}
+                            styleType={BUTTON_STYLE_TYPE_PRIMARY}
+                            type={BUTTON_TYPE_SUBMIT}
+                        />
+                        {
+                            labelCTASecondary
+                            && (
+                                <Button
+                                    className={'ml--2'}
+                                    handleClick={handleClickCTASecondary}
+                                    isWarning={isWarningCTASecondary}
+                                    label={labelCTASecondary}
+                                    styleType={BUTTON_STYLE_TYPE_SECONDARY}
+                                    type={BUTTON_TYPE_BUTTON}
+                                />
+                            )
+                        }
+                    </div>
+                </form>
             </div>
         </div>
     );

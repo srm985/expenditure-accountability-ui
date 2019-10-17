@@ -10,6 +10,8 @@ import {
     INPUT_TYPE_TEL
 } from '../../components/InputComponent/config';
 
+import currency from '../../utils/currency';
+
 import {
     TRANSACTION_TYPE_LABELS,
     TRANSACTION_TYPES
@@ -55,8 +57,14 @@ class AddTransactionModule extends React.Component {
             }
         } = event;
 
+        let formattedValue = value;
+
+        if (name === 'transactionTotalCost') {
+            formattedValue = currency.realTimeFormat(value);
+        }
+
         this.setState({
-            [name]: value
+            [name]: formattedValue
         });
     }
 
@@ -78,7 +86,7 @@ class AddTransactionModule extends React.Component {
             transactionDate,
             transactionDescription,
             transactionTitle,
-            transactionTotalCost,
+            transactionTotalCost: currency.unFormat(transactionTotalCost),
             transactionType
         });
     }
@@ -90,7 +98,8 @@ class AddTransactionModule extends React.Component {
                 isAddingTransaction
             },
             state: {
-                modalKey
+                modalKey,
+                transactionTotalCost
             }
         } = this;
 
@@ -158,6 +167,7 @@ class AddTransactionModule extends React.Component {
                     name={'transactionTotalCost'}
                     placeholder={'transaction total cost'}
                     type={INPUT_TYPE_TEL}
+                    value={transactionTotalCost}
                 />
             </Modal>
         );

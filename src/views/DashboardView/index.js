@@ -13,7 +13,7 @@ import AddTransaction from '../../modules/AddTransactionModule';
 import LinkSplitwise from '../../modules/LinkSplitwiseModule';
 
 import classNames from '../../utils/classNames';
-import formatCurrency from '../../utils/formatCurrency';
+import currency from '../../utils/currency';
 import makeCall, {
     CALL_TYPE_DELETE,
     CALL_TYPE_GET,
@@ -69,9 +69,9 @@ class DashboardView extends React.Component {
                 calculatedWeeklyExpenditure,
                 didExceedWeeklyLimit,
                 endDate: moment(date).format('DD.MM.YY'),
-                groceryExpense: formatCurrency(groceryExpense),
-                personalExpense: formatCurrency(personalExpense),
-                sharedExpense: formatCurrency(sharedExpense),
+                groceryExpense: currency.format(groceryExpense),
+                personalExpense: currency.format(personalExpense),
+                sharedExpense: currency.format(sharedExpense),
                 startDate: moment(date).subtract(6, 'days').format('DD.MM.YY')
             });
         });

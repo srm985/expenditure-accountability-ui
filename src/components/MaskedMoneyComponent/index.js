@@ -7,7 +7,7 @@ import {
     BUTTON_STYLE_TYPE_INLINE
 } from '../ButtonComponent/config';
 
-import formatCurrency from '../../utils/formatCurrency';
+import currency from '../../utils/currency';
 
 const HIDE_LABEL = 'hide';
 const SHOW_LABEL = 'show';
@@ -45,7 +45,7 @@ class MaskedMoneyComponent extends React.Component {
             }
         } = this;
 
-        return isMasked ? '$XXX.XX' : formatCurrency(value);
+        return isMasked ? '$XXX.XX' : currency.format(value);
     }
 
     render() {

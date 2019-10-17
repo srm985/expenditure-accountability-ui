@@ -19,7 +19,8 @@ const InputComponent = (props) => {
         label,
         name,
         placeholder,
-        type
+        type,
+        value
     } = props;
 
     const {
@@ -61,6 +62,7 @@ const InputComponent = (props) => {
                 placeholder={placeholder}
                 required={isRequired}
                 type={type}
+                value={value}
             />
         </label>
     );
@@ -79,7 +81,11 @@ InputComponent.propTypes = {
     label: PropTypes.string,
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
-    type: PropTypes.oneOf(INPUT_TYPES)
+    type: PropTypes.oneOf(INPUT_TYPES),
+    value: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string
+    ])
 };
 
 InputComponent.defaultProps = {
@@ -89,7 +95,8 @@ InputComponent.defaultProps = {
     isRequired: false,
     label: '',
     placeholder: '',
-    type: INPUT_TYPE_TEXT
+    type: INPUT_TYPE_TEXT,
+    value: undefined
 };
 
 export default InputComponent;

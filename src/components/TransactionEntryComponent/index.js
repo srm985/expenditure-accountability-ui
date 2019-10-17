@@ -19,7 +19,7 @@ import {
 } from '../InputComponent/config';
 
 import classNames from '../../utils/classNames';
-import formatCurrency from '../../utils/formatCurrency';
+import currency from '../../utils/currency';
 
 import {
     cart,
@@ -103,8 +103,14 @@ class TransactionEntryComponent extends React.Component {
             }
         } = event;
 
+        let formattedValue = value;
+
+        if (name === 'transactionTotalCost') {
+            formattedValue = currency.realTimeFormat(value);
+        }
+
         this.setState({
-            [name]: value
+            [name]: formattedValue
         });
     }
 
@@ -130,7 +136,7 @@ class TransactionEntryComponent extends React.Component {
             transactionDescription,
             transactionID,
             transactionTitle,
-            transactionTotalCost,
+            transactionTotalCost: currency.unFormat(transactionTotalCost),
             transactionType
         });
 
@@ -265,11 +271,11 @@ class TransactionEntryComponent extends React.Component {
             <>
                 <div className={`${displayName}__shared-cost`}>
                     <span>{'Your Cost'}</span>
-                    <span>{formatCurrency(transactionSharedCost)}</span>
+                    <span>{currency.format(transactionSharedCost)}</span>
                 </div>
                 <div className={`${displayName}__total-cost`}>
                     <span>{'Total Cost'}</span>
-                    <span>{formatCurrency(transactionTotalCost)}</span>
+                    <span>{currency.format(transactionTotalCost)}</span>
                 </div>
             </>
         );
@@ -371,6 +377,7 @@ class TransactionEntryComponent extends React.Component {
                                 name={'transactionTotalCost'}
                                 placeholder={'transaction total cost'}
                                 type={INPUT_TYPE_TEL}
+                                value={transactionTotalCost}
                             />
                             <div className={`${displayName}__drawer-buttons`}>
                                 <Button
@@ -475,7 +482,10 @@ TransactionEntryComponent.propTypes = {
             PropTypes.string
         ]).isRequired,
         transactionDescription: PropTypes.string,
-        transactionID: PropTypes.string,
+        transactionID: PropTypes.oneOfType([
+            PropTypes.number,
+            PropTypes.string
+        ]).isRequired,
         transactionSharedCost: PropTypes.number.isRequired,
         transactionTitle: PropTypes.string,
         transactionTotalCost: PropTypes.number.isRequired,

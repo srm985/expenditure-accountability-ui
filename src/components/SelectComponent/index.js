@@ -64,11 +64,11 @@ const SelectComponent = (props) => {
             }
             <select
                 className={`${displayName}__select`}
+                defaultValue={defaultValue}
                 id={name}
                 name={name}
                 onChange={handleChange}
                 required={isRequired}
-                value={defaultValue}
             >
                 {generatedOptions}
             </select>
