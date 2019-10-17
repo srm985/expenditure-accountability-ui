@@ -27,9 +27,6 @@ const IconComponent = (props) => {
             dangerouslySetInnerHTML={{
                 __html: icon
             }}
-            onClick={handleClick}
-            role={'button'}
-            tabIndex={0}
             {...(isButton ? buttonAttributes : {})}
         />
     );
