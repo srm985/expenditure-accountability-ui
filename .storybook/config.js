@@ -6,16 +6,10 @@ import {
     configure
 } from '@storybook/react';
 import {
-    withInfo
-} from '@storybook/addon-info';
-import {
     withKnobs
 } from '@storybook/addon-knobs';
 
 import '../src/styles/styles.scss';
-
-// This must be first decorator.
-addDecorator(withInfo);
 
 addDecorator((storyFn, context) => withConsole()(storyFn)(context));
 addDecorator(withKnobs);
