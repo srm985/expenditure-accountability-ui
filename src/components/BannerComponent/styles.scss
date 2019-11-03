@@ -1,0 +1,57 @@
+@import '../../styles/constants';
+$banner-height: 50px;
+
+.BannerComponent {
+    position: fixed;
+    z-index: $z-index-banner;
+    top: $header-height;
+    left: 0;
+
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    box-sizing: border-box;
+    width: 100%;
+    padding: #{2 * $planck-length};
+
+    transition: transform 0.5s ease-in-out;
+    transform: translateY(-200px);
+
+    border-right: solid 2px $color-orange;
+    border-bottom: solid 2px $color-orange;
+    border-left: solid 2px $color-orange;
+    border-bottom-right-radius: $border-radius-default;
+    border-bottom-left-radius: $border-radius-default;
+    background-color: $color-white;
+    box-shadow: 0 5px 5px -5px $color-gray-dark;
+
+    @media only screen and (min-width: $breakpoint-medium) {
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    &--visible {
+        transition-delay: 2s;
+        transform: translateY(0);
+    }
+
+    &__title-block {
+        margin-bottom: #{2 * $planck-length};
+
+        @media only screen and (min-width: $breakpoint-medium) {
+            margin-right: #{2 * $planck-length};
+            margin-bottom: 0;
+        }
+    }
+
+    .ButtonComponent {
+        align-self: flex-end;
+
+        @media only screen and (min-width: $breakpoint-medium) {
+            align-self: center;
+        }
+    }
+}

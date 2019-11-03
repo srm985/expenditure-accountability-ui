@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
+import Banner from '../../components/BannerComponent';
 import Calendar from '../../components/CalendarComponent';
 import Card from '../../components/CardComponent';
 import FAB from '../../components/FABComponent';
@@ -30,8 +31,10 @@ class DashboardView extends React.Component {
             calculatedTransactions: [],
             currentTab: 0,
             enteredTransactions: [],
+            hasExceededMonthlyLimit: false,
             isAddingTransaction: false,
-            isPromptLinkSplitwiseModalShown: false
+            isPromptLinkSplitwiseModalShown: false,
+            monthlyExpenditureLimit: 0
         };
     }
 
@@ -49,6 +52,26 @@ class DashboardView extends React.Component {
             if (!isLinked) {
                 this.toggleSplitwisePromptModalVisible();
             }
+        }).catch(() => {
+            // No action required.
+        });
+
+        makeCall({
+            method: CALL_TYPE_GET,
+            URL: '/api/account-status'
+        }).then((response) => {
+            const {
+                hasExceededMonthlyLimit,
+                monthlyExpenditureLimit
+            } = response;
+
+            if (hasExceededMonthlyLimit) {
+                this.toggleBannerShown();
+            }
+
+            this.setState({
+                monthlyExpenditureLimit
+            });
         }).catch(() => {
             // No action required.
         });
@@ -186,6 +209,18 @@ class DashboardView extends React.Component {
         });
     }
 
+    toggleBannerShown = () => {
+        this.setState((previousState) => {
+            const {
+                hasExceededMonthlyLimit
+            } = previousState;
+
+            return ({
+                hasExceededMonthlyLimit: !hasExceededMonthlyLimit
+            });
+        });
+    }
+
     renderDashboardViews = () => {
         const {
             state: {
@@ -263,8 +298,10 @@ class DashboardView extends React.Component {
     render() {
         const {
             state: {
+                hasExceededMonthlyLimit,
                 isAddingTransaction,
-                isPromptLinkSplitwiseModalShown
+                isPromptLinkSplitwiseModalShown,
+                monthlyExpenditureLimit
             }
         } = this;
 
@@ -275,6 +312,13 @@ class DashboardView extends React.Component {
         return (
             <>
                 <Header />
+                <Banner
+                    ctaLabel={'Understood'}
+                    handleAcknowledge={this.toggleBannerShown}
+                    isVisible={hasExceededMonthlyLimit}
+                    subTitle={`You have exceeded your monthly expenditure limit of ${currency.format(monthlyExpenditureLimit)} and should discontinue any further spending.`}
+                    title={'Monthly balance exceeded!'}
+                />
                 <main className={displayName}>
                     <Grid>
                         <GridItem
