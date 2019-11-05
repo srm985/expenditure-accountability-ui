@@ -21,7 +21,7 @@ const currency = {
         return formattedValue;
     },
 
-    unFormat: (value) => parseFloat(new Intl.NumberFormat('en-US').format(value.replace('$', '')))
+    unFormat: (value) => parseFloat(new Intl.NumberFormat('en-US').format(value.toString().replace('$', '')))
 };
 
 export default currency;

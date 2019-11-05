@@ -14,6 +14,7 @@ import currency from '../../utils/currency';
 
 import {
     TRANSACTION_TYPE_LABELS,
+    TRANSACTION_TYPE_PERSONAL,
     TRANSACTION_TYPES
 } from '../../constants';
 
@@ -47,6 +48,12 @@ class AddTransactionModule extends React.Component {
                 modalKey: Math.random()
             });
         }
+    }
+
+    handleClearFields = () => {
+        this.setState({
+            transactionTotalCost: ''
+        });
     }
 
     handleChange = (event) => {
@@ -89,12 +96,25 @@ class AddTransactionModule extends React.Component {
             transactionTotalCost: currency.unFormat(transactionTotalCost),
             transactionType
         });
+
+        this.handleClearFields();
+    }
+
+    handleCancel = () => {
+        const {
+            props: {
+                handleCancel
+            }
+        } = this;
+
+        this.handleClearFields();
+
+        handleCancel();
     }
 
     render() {
         const {
             props: {
-                handleCancel,
                 isAddingTransaction
             },
             state: {
@@ -116,8 +136,8 @@ class AddTransactionModule extends React.Component {
 
         return (
             <Modal
-                handleClickCTASecondary={handleCancel}
-                handleClose={handleCancel}
+                handleClickCTASecondary={this.handleCancel}
+                handleClose={this.handleCancel}
                 isShown={isAddingTransaction}
                 key={modalKey}
                 labelCTAPrimary={'Submit'}
@@ -153,6 +173,7 @@ class AddTransactionModule extends React.Component {
                 />
                 <Select
                     className={'mb--2'}
+                    defaultValue={TRANSACTION_TYPE_PERSONAL}
                     handleChange={this.handleChange}
                     isRequired
                     label={'Type'}
