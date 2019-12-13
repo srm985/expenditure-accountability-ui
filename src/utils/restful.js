@@ -36,6 +36,7 @@ const makeCall = (parameters) => new Promise((resolve, reject) => {
 
     fetch(`${apiURL}${URL}`, {
         body,
+        credentials: 'include',
         headers,
         method
     }).then((response = {}) => {
@@ -43,6 +44,8 @@ const makeCall = (parameters) => new Promise((resolve, reject) => {
             ok,
             status
         } = response;
+
+        console.log('data:', response);
 
         if (status === 401) {
             authentication.clear();
