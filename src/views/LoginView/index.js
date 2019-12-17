@@ -84,12 +84,12 @@ class LoginView extends React.PureComponent {
                 URL: '/api/login'
             }).then((response) => {
                 const {
-                    token
+                    tokenSignature
                 } = response;
 
-                // If we receive a valid token, store it.
-                if (token) {
-                    authentication.authenticate(token);
+                // If we receive a valid token signature, store it.
+                if (tokenSignature) {
+                    authentication.authenticate(tokenSignature);
 
                     this.setState({
                         isAuthenticated: true
