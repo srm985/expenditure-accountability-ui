@@ -45,8 +45,6 @@ const makeCall = (parameters) => new Promise((resolve, reject) => {
             status
         } = response;
 
-        console.log('data:', response);
-
         if (status === 401) {
             authentication.clear();
             window.location.href = '/login';
