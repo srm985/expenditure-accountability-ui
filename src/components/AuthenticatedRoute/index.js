@@ -1,7 +1,7 @@
 import React from 'react';
 import {
-    Route,
-    Redirect
+    Redirect,
+    Route
 } from 'react-router-dom';
 
 import authentication from '../../utils/authentication';

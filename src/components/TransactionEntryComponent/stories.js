@@ -1,7 +1,3 @@
-import React from 'react';
-import {
-    storiesOf
-} from '@storybook/react';
 import {
     boolean,
     date,
@@ -9,12 +5,16 @@ import {
     select,
     text
 } from '@storybook/addon-knobs';
-
-import TransactionEntryComponent from './index';
+import {
+    storiesOf
+} from '@storybook/react';
+import React from 'react';
 
 import {
     TRANSACTION_TYPES
 } from '../../constants';
+
+import TransactionEntryComponent from './index';
 
 const stories = storiesOf(TransactionEntryComponent.displayName, module);
 

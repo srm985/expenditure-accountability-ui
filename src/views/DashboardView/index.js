@@ -1,5 +1,8 @@
-import React from 'react';
 import moment from 'moment';
+import React from 'react';
+
+import AddTransaction from '../../modules/AddTransactionModule';
+import LinkSplitwise from '../../modules/LinkSplitwiseModule';
 
 import Banner from '../../components/BannerComponent';
 import Button from '../../components/ButtonComponent';
@@ -14,9 +17,6 @@ import Table from '../../components/TableComponent';
 import {
     BUTTON_STYLE_TYPE_INLINE
 } from '../../components/ButtonComponent/config';
-
-import AddTransaction from '../../modules/AddTransactionModule';
-import LinkSplitwise from '../../modules/LinkSplitwiseModule';
 
 import classNames from '../../utils/classNames';
 import currency from '../../utils/currency';

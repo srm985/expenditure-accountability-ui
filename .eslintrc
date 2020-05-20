@@ -22,6 +22,7 @@
     ],
     "parser": "babel-eslint",
     "plugins": [
+        "import",
         "sort-destructure-keys"
     ],
     "rules": {
@@ -63,6 +64,123 @@
                     "./.storybook/**/*.js",
                     "./scripts/**/*.js",
                     "./src/**/stories.js"
+                ]
+            }
+        ],
+        "import/order": [
+            "error",
+            {
+                "alphabetize": {
+                    "caseInsensitive": true,
+                    "order": "asc"
+                },
+                "groups": [
+                    "external",
+                    "builtin",
+                    "parent"
+                ],
+                "newlines-between": "always",
+                "pathGroups": [
+                    {
+                        "group": "parent",
+                        "pattern": "./views/*",
+                        "position": "after"
+                    },
+                    {
+                        "group": "parent",
+                        "pattern": "../views/*",
+                        "position": "after"
+                    },
+                    {
+                        "group": "parent",
+                        "pattern": "../../views/*",
+                        "position": "after"
+                    },
+                    {
+                        "group": "parent",
+                        "pattern": "./modules/*",
+                        "position": "after"
+                    },
+                    {
+                        "group": "parent",
+                        "pattern": "../modules/*",
+                        "position": "after"
+                    },
+                    {
+                        "group": "parent",
+                        "pattern": "../../modules/*",
+                        "position": "after"
+                    },
+                    {
+                        "group": "parent",
+                        "pattern": "./components/*",
+                        "position": "after"
+                    },
+                    {
+                        "group": "parent",
+                        "pattern": "../components/*",
+                        "position": "after"
+                    },
+                    {
+                        "group": "parent",
+                        "pattern": "../../components/*",
+                        "position": "after"
+                    },
+                    {
+                        "group": "parent",
+                        "pattern": "./config",
+                        "position": "after"
+                    },
+                    {
+                        "group": "parent",
+                        "pattern": "../**/config",
+                        "position": "after"
+                    },
+                    {
+                        "group": "parent",
+                        "pattern": "../../components/**/config",
+                        "position": "after"
+                    },
+                    {
+                        "group": "parent",
+                        "pattern": "./utils/*",
+                        "position": "after"
+                    },
+                    {
+                        "group": "parent",
+                        "pattern": "../utils/*",
+                        "position": "after"
+                    },
+                    {
+                        "group": "parent",
+                        "pattern": "../../utils/*",
+                        "position": "after"
+                    },
+                    {
+                        "group": "parent",
+                        "pattern": "./routes",
+                        "position": "after"
+                    },
+                    {
+                        "group": "parent",
+                        "pattern": "../routes",
+                        "position": "after"
+                    },
+                    {
+                        "group": "parent",
+                        "pattern": "../../routes",
+                        "position": "after"
+                    },
+                    {
+                        "group": "parent",
+                        "pattern": "../../../config.json",
+                        "position": "after"
+                    },
+                    {
+                        "group": "parent",
+                        "pattern": "../../assets/**/*",
+                        "position": "after"
+                    }
                 ]
             }
         ],
@@ -196,6 +314,12 @@
             2,
             {
                 "caseSensitive": false
+            }
+        ],
+        "sort-imports": [
+            "error",
+            {
+                "ignoreDeclarationSort": true
             }
         ],
         "sort-keys": [

@@ -1,6 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import {
+    TRANSACTION_TYPES,
+    TRANSACTION_TYPE_LABELS,
+    TRANSACTION_TYPE_PERSONAL
+} from '../../constants';
+
 import Input from '../../components/InputComponent';
 import Modal from '../../components/ModalComponent';
 import Select from '../../components/SelectComponent';
@@ -11,12 +17,6 @@ import {
 } from '../../components/InputComponent/config';
 
 import currency from '../../utils/currency';
-
-import {
-    TRANSACTION_TYPE_LABELS,
-    TRANSACTION_TYPE_PERSONAL,
-    TRANSACTION_TYPES
-} from '../../constants';
 
 class AddTransactionModule extends React.Component {
     constructor(props) {

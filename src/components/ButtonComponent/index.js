@@ -1,16 +1,16 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import classNames from '../../utils/classNames';
-
 import {
+    BUTTON_STYLE_TYPES,
     BUTTON_STYLE_TYPE_INLINE,
     BUTTON_STYLE_TYPE_PRIMARY,
     BUTTON_STYLE_TYPE_SECONDARY,
-    BUTTON_STYLE_TYPES,
-    BUTTON_TYPE_BUTTON,
-    BUTTON_TYPES
+    BUTTON_TYPES,
+    BUTTON_TYPE_BUTTON
 } from './config';
+
+import classNames from '../../utils/classNames';
 
 import './styles.scss';
 

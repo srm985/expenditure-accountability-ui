@@ -1,11 +1,11 @@
-import React from 'react';
 import {
     storiesOf
 } from '@storybook/react';
-
-import BannerComponent from './index';
+import React from 'react';
 
 import Button from '../ButtonComponent';
+
+import BannerComponent from './index';
 
 const stories = storiesOf(BannerComponent.displayName, module);
 

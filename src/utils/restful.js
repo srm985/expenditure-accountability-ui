@@ -1,5 +1,4 @@
 import authentication from './authentication';
-
 import loadingIndicator from './loadingIndicator';
 
 export const CALL_TYPE_DELETE = 'DELETE';

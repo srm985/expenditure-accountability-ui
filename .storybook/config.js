@@ -2,12 +2,12 @@ import {
     withConsole
 } from '@storybook/addon-console';
 import {
+    withKnobs
+} from '@storybook/addon-knobs';
+import {
     addDecorator,
     configure
 } from '@storybook/react';
-import {
-    withKnobs
-} from '@storybook/addon-knobs';
 
 import '../src/styles/styles.scss';
 

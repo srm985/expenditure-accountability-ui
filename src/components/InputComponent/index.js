@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import {
-    INPUT_TYPE_TEXT,
-    INPUT_TYPES
+    INPUT_TYPES,
+    INPUT_TYPE_TEXT
 } from './config';
 
 import classNames from '../../utils/classNames';

@@ -1,6 +1,7 @@
 /* eslint no-console: 0 */
 
 const Client = require('ftp');
+
 const fs = require('fs');
 
 const TYPE_DIRECTORY = 'd';
