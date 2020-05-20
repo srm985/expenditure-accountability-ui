@@ -1,8 +1,6 @@
 @import '../../styles/constants';
 
 %button {
-    font-size: 16px;
-    line-height: 16px;
 
     display: flex;
     align-items: center;
@@ -13,8 +11,11 @@
     height: 40px;
     padding: 0 10px;
 
-    text-decoration: none;
+    font-size: 16px;
+    line-height: 16px;
     text-transform: uppercase;
+
+    text-decoration: none;
 
     border-radius: 5px;
 }
@@ -22,16 +23,18 @@
 .ButtonComponent {
     font-family: $font-stack;
 
-    cursor: pointer;
-    transition: background-color ease-in-out 0.2s, color ease-in-out 0.2s;
-
     border: none;
     outline: none;
+
+    cursor: pointer;
+
+    transition: background-color ease-in-out 0.2s, color ease-in-out 0.2s;
 
     &--primary {
         @extend %button;
 
         color: $color-white;
+
         background-color: $color-blue;
 
         &:hover {
@@ -45,31 +48,35 @@
         @extend %button;
 
         color: $color-blue;
-        border: solid 1px $color-blue;
+
         background-color: transparent;
+        border: solid 1px $color-blue;
 
         &:hover {
             @media only screen and (min-width: $breakpoint-medium) {
                 color: $color-white;
+
                 background-color: $color-blue;
             }
         }
     }
 
     &--inline {
-        font-size: inherit;
 
         margin: 0;
         padding: 0;
 
+        color: $color-blue;
+        font-size: inherit;
+
         text-decoration: underline;
 
-        color: $color-blue;
         background-color: transparent;
     }
 
     &--primary-warning {
         color: $color-white;
+
         background-color: $color-red;
 
         &:hover {
@@ -81,12 +88,14 @@
 
     &--secondary-warning {
         color: $color-red;
-        border: solid 1px $color-red;
+
         background-color: transparent;
+        border: solid 1px $color-red;
 
         &:hover {
             @media only screen and (min-width: $breakpoint-medium) {
                 color: $color-white;
+
                 background-color: $color-red;
             }
         }

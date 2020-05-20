@@ -158,8 +158,8 @@ class TableRowComponent extends React.Component {
                                 isEditing
                                     ? (
                                         <Icon
-                                            icon={save}
                                             handleClick={this.handleSave}
+                                            icon={save}
                                         />
                                     )
                                     : (

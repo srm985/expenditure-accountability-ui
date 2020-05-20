@@ -80,7 +80,7 @@ class PopoverComponent extends React.Component {
             displayName
         } = PopoverComponent;
 
-        return optionsList.map((option, index) => {
+        return optionsList.map((option) => {
             const {
                 action,
                 label
@@ -89,7 +89,7 @@ class PopoverComponent extends React.Component {
             return (
                 <div
                     className={`${displayName}__popover-option`}
-                    key={index}
+                    key={label}
                 >
                     <Button
                         handleClick={() => this.handleOptionSelect(action)}
@@ -115,15 +115,15 @@ class PopoverComponent extends React.Component {
 
         return (
             <div className={displayName}>
-                <button
+                <Button
                     className={`${displayName}__toggle-button`}
-                    onClick={this.togglePopover}
-                    type={'button'}
+                    handleClick={this.togglePopover}
+                    styleType={BUTTON_STYLE_TYPE_INLINE}
                 >
                     <span className={`${displayName}__icon`} />
                     <span className={`${displayName}__icon`} />
                     <span className={`${displayName}__icon`} />
-                </button>
+                </Button>
                 {
                     isPopped
                     && (

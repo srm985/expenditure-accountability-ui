@@ -1,41 +1,44 @@
 @import '../../styles/constants';
+
 $banner-height: 50px;
 
 .BannerComponent {
     position: fixed;
-    z-index: $z-index-banner;
     top: $header-height;
     left: 0;
+    z-index: $z-index-banner;
 
     display: flex;
-    align-items: flex-start;
     flex-direction: column;
+    align-items: flex-start;
     justify-content: flex-start;
 
     box-sizing: border-box;
     width: 100%;
     padding: #{2 * $planck-length};
 
-    transition: transform 0.5s ease-in-out;
-    transform: translateY(-200px);
+    background-color: $color-white;
 
     border-right: solid 2px $color-orange;
     border-bottom: solid 2px $color-orange;
     border-left: solid 2px $color-orange;
     border-bottom-right-radius: $border-radius-default;
     border-bottom-left-radius: $border-radius-default;
-    background-color: $color-white;
     box-shadow: 0 5px 5px -5px $color-gray-dark;
+    transform: translateY(-200px);
+
+    transition: transform 0.5s ease-in-out;
 
     @media only screen and (min-width: $breakpoint-medium) {
-        align-items: center;
         flex-direction: row;
+        align-items: center;
         justify-content: space-between;
     }
 
     &--visible {
-        transition-delay: 2s;
         transform: translateY(0);
+
+        transition-delay: 2s;
     }
 
     &__title-block {

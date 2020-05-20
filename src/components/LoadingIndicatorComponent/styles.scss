@@ -2,9 +2,9 @@
 
 .LoadingIndicatorComponent {
     position: fixed;
-    z-index: $z-index-loading-indicator;
     top: 0;
     left: 0;
+    z-index: $z-index-loading-indicator;
 
     display: none;
     align-items: center;
@@ -34,11 +34,12 @@
             width: 100%;
             height: 100%;
 
-            animation: sk-bounce 2s infinite ease-in-out;
+            background-color: $color-white;
+            border-radius: 50%;
 
             opacity: 0.6;
-            border-radius: 50%;
-            background-color: $color-white;
+
+            animation: sk-bounce 2s infinite ease-in-out;
 
             &:last-of-type {
                 animation-delay: -1s;

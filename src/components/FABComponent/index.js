@@ -16,6 +16,7 @@ const FABComponent = (props) => {
         <button
             className={displayName}
             onClick={handleClick}
+            // eslint-disable-next-line react/button-has-type
             type={'button'}
         >
             <span />

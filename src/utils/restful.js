@@ -26,7 +26,7 @@ const makeCall = (parameters) => new Promise((resolve, reject) => {
     const token = authentication.retrieve();
 
     const headers = new Headers({
-        'Authorization': token ? `Bearer ${token}` : undefined,
+        Authorization: token ? `Bearer ${token}` : undefined,
         'Content-Type': 'application/json'
     });
 

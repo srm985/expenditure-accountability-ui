@@ -66,8 +66,8 @@ class MaskedMoneyComponent extends React.Component {
                 </span>
                 <Button
                     className={'ml--1'}
-                    label={label}
                     handleClick={this.toggleMasked}
+                    label={label}
                     styleType={BUTTON_STYLE_TYPE_INLINE}
                 />
             </div>

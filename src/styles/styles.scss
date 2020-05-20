@@ -1,20 +1,19 @@
 @import './constants';
-
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
 
 body {
-    font-family: $font-stack;
-
-    overflow-x: hidden;
-
     box-sizing: border-box;
     width: 100%;
     max-width: 100%;
     min-height: 100vh;
     margin: 0;
     padding: #{$header-height + (2 * $planck-length)} #{2 * $planck-length} #{$footer-height + (4 * $planck-length)};
+    overflow-x: hidden;
 
     color: $color-black;
+    font-size: $font-size-regular;
+    font-family: $font-stack;
+
     background-color: $color-gray-light;
 }
 

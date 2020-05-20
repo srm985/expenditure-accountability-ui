@@ -14,11 +14,12 @@
         width: 100%;
         padding: 2px;
 
-        cursor: pointer;
+        background-color: transparent;
 
         border: none;
         outline: none;
-        background-color: transparent;
+
+        cursor: pointer;
 
         &:hover {
             & > span {
@@ -30,8 +31,9 @@
             width: 4px;
             height: 4px;
 
-            border-radius: 50%;
             background-color: $color-blue;
+
+            border-radius: 50%;
         }
     }
 
@@ -47,9 +49,9 @@
 
     &__popover-backdrop {
         position: absolute;
-        z-index: 1;
         top: -10px;
         left: -10px;
+        z-index: 1;
 
         width: calc(100% + 20px);
         height: calc(100% + 20px);
@@ -59,18 +61,19 @@
 
     &__popover-tab {
         position: absolute;
-        z-index: 3;
         top: -5px;
         left: 76px;
+        z-index: 3;
 
         width: 10px;
         height: 10px;
 
-        transform: rotate(45deg);
+        background-color: $color-white;
 
         border-top: solid 1px $color-gray-dark;
         border-left: solid 1px $color-gray-dark;
-        background-color: $color-white;
+
+        transform: rotate(45deg);
     }
 
     &__popover-body {
@@ -85,10 +88,11 @@
     }
 
     &__popover-option {
-        font-size: 18px;
 
         box-sizing: border-box;
         padding: 10px;
+
+        font-size: 18px;
 
         text-align: center;
 

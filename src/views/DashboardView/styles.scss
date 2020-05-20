@@ -3,30 +3,29 @@
 .DashboardView {
     &__tabs-wrapper {
         position: fixed;
-        z-index: $z-index-footer;
         bottom: 0;
         left: 0;
+        z-index: $z-index-footer;
 
         display: flex;
-
         width: 100%;
         height: 40px;
     }
 
     &__tab {
-        font-weight: bold;
-
         flex: 1;
 
-        cursor: pointer;
-        text-transform: uppercase;
-
         color: $color-white;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-decoration: none;
+
+        background-color: $color-gray-dark;
         border: none;
         border-top: solid 1px $color-gray-dark;
         border-right: solid 1px $color-gray-dark;
         outline: none;
-        background-color: $color-gray-dark;
+        cursor: pointer;
 
         &:last-of-type {
             border-right: none;
@@ -34,6 +33,7 @@
 
         &--active {
             color: $color-white;
+
             background-color: $color-blue;
         }
     }

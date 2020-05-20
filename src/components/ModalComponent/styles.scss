@@ -2,9 +2,9 @@
 
 .ModalComponent {
     position: fixed;
-    z-index: $z-index-modal;
     top: 0;
     left: 0;
+    z-index: $z-index-modal;
 
     display: none;
     align-items: center;
@@ -45,8 +45,9 @@
         min-height: 200px;
         padding: 20px;
 
-        border-radius: 10px;
         background-color: $color-white;
+
+        border-radius: 10px;
     }
 
     &__footer {
@@ -69,10 +70,11 @@
         width: 20px;
         height: 20px;
 
-        cursor: pointer;
+        background-color: transparent;
 
         border: none;
-        background-color: transparent;
+
+        cursor: pointer;
 
         & > div {
             position: relative;
@@ -80,11 +82,12 @@
             width: 1px;
             height: 100%;
 
-            transition: background-color ease-in-out 0.2s;
-            transform: rotate(45deg);
+            background-color: $color-gray-dark;
 
             outline: none;
-            background-color: $color-gray-dark;
+            transform: rotate(45deg);
+
+            transition: background-color ease-in-out 0.2s;
 
             &::before {
                 position: absolute;
@@ -94,10 +97,10 @@
                 width: 100%;
                 height: 100%;
 
-                content: '';
+                background-color: inherit;
                 transform: rotate(-90deg);
 
-                background-color: inherit;
+                content: '';
             }
         }
     }

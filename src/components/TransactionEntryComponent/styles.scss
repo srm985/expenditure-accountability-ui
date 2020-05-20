@@ -2,8 +2,8 @@
 
 %table-cell {
     display: flex;
-    align-items: flex-start;
     flex-direction: column;
+    align-items: flex-start;
     justify-content: center;
 
     box-sizing: border-box;
@@ -97,23 +97,24 @@
     &__title {
         @extend %table-cell;
 
-        font-size: $font-size-small;
-
         flex: 6;
 
+        font-size: $font-size-small;
+
         @media only screen and (min-width: $breakpoint-small) {
-            font-size: $font-size-regular;
 
             flex: 7;
+
+            font-size: $font-size-regular;
         }
     }
 
     &__shared-cost,
     &__total-cost {
         @extend %table-cell;
+        flex: 4;
 
         align-items: flex-end;
-        flex: 4;
 
         & > span {
             &:first-of-type {
@@ -132,22 +133,23 @@
     }
 
     &__drawer {
-        overflow: hidden;
 
         max-height: 0;
         padding-right: #{2 * $planck-length};
         padding-left: #{2 * $planck-length};
+        overflow: hidden;
 
-        transition: all ease-in-out 0.2s; // sass-lint:disable-line no-transition-all
+        background-color: $color-gray-light;
+
+        border-bottom: solid 1px $color-gray-dark;
+        box-shadow: inset 0 -5px 5px -5px $color-gray-dark;
 
         transform: scaleY(1px);
         transform-origin: top;
+
+        transition: all ease-in-out 0.2s; // sass-lint:disable-line no-transition-all
         animation-duration: 0.5s;
         animation-timing-function: ease-in-out;
-
-        border-bottom: solid 1px $color-gray-dark;
-        background-color: $color-gray-light;
-        box-shadow: inset 0 -5px 5px -5px $color-gray-dark;
 
         &--open {
             max-height: 1000px;

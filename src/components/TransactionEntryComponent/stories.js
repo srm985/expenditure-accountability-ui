@@ -18,7 +18,6 @@ import {
 
 const stories = storiesOf(TransactionEntryComponent.displayName, module);
 
-
 stories.add('default', () => {
     const defaultDate = new Date();
     const transactionDescription = 'Ex non enim sint reprehenderit nostrud';

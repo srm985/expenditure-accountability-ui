@@ -9,7 +9,6 @@
             "files": [
                 "scripts/**/*.js",
                 "src/**/*stories.js"
-
             ],
             "rules": {
                 "no-alert": [
@@ -22,6 +21,9 @@
         }
     ],
     "parser": "babel-eslint",
+    "plugins": [
+        "sort-destructure-keys"
+    ],
     "rules": {
         "array-bracket-newline": [
             "error",
@@ -74,9 +76,6 @@
         "jsx-a11y/click-events-have-key-events": [
             0
         ],
-        "jsx-a11y/control-has-associated-label": [
-            0
-        ],
         "jsx-a11y/no-static-element-interactions": [
             0
         ],
@@ -93,13 +92,16 @@
         "max-len": [
             0
         ],
-        "no-control-regex": [
-            0
-        ],
         "no-empty": [
             "error",
             {
                 "allowEmptyCatch": true
+            }
+        ],
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max": 1
             }
         ],
         "no-plusplus": [
@@ -123,9 +125,14 @@
                 "allowMultiplePropertiesPerLine": false
             }
         ],
-        "quote-props": [
+        "react/boolean-prop-naming": [
             "error",
-            "consistent-as-needed"
+            {
+                "rule": "^(can|is|has|should|was)[A-Z]([A-Za-z0-9]?)+"
+            }
+        ],
+        "react/display-name": [
+            "error"
         ],
         "react/jsx-curly-brace-presence": [
             "error",
@@ -151,23 +158,45 @@
             "error",
             4
         ],
+        "react/jsx-max-props-per-line": [
+            "error",
+            {
+                "maximum": 1
+            }
+        ],
         "react/jsx-one-expression-per-line": [
             0
         ],
         "react/jsx-props-no-spreading": [
             0
         ],
-        "react/no-array-index-key": [
-            0
+        "react/jsx-sort-props": [
+            "error",
+            {
+                "ignoreCase": true
+            }
+        ],
+        "react/no-access-state-in-setstate": [
+            "error"
         ],
         "react/no-did-update-set-state": [
             0
         ],
-        "react/no-find-dom-node": [
-            0
-        ],
         "react/no-unescaped-entities": [
             0
+        ],
+        "react/sort-prop-types": [
+            "error",
+            {
+                "ignoreCase": true,
+                "sortShapeProp": true
+            }
+        ],
+        "sort-destructure-keys/sort-destructure-keys": [
+            2,
+            {
+                "caseSensitive": false
+            }
         ],
         "sort-keys": [
             "error",

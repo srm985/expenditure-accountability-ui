@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 
 import Banner from '../../components/BannerComponent';
+import Button from '../../components/ButtonComponent';
 import Calendar from '../../components/CalendarComponent';
 import Card from '../../components/CardComponent';
 import FAB from '../../components/FABComponent';
@@ -9,6 +10,10 @@ import Grid from '../../components/GridComponent';
 import GridItem from '../../components/GridItemComponent';
 import Header from '../../components/HeaderComponent';
 import Table from '../../components/TableComponent';
+
+import {
+    BUTTON_STYLE_TYPE_INLINE
+} from '../../components/ButtonComponent/config';
 
 import AddTransaction from '../../modules/AddTransactionModule';
 import LinkSplitwise from '../../modules/LinkSplitwiseModule';
@@ -230,7 +235,6 @@ class DashboardView extends React.Component {
             }
         } = this;
 
-
         const tableHeaderList = [
             'Date',
             'Personal Expense',
@@ -277,14 +281,13 @@ class DashboardView extends React.Component {
             );
 
             return (
-                <button
+                <Button
                     className={tabClassNames}
+                    handleClick={() => { this.handleChangeTab(tabNumber); }}
                     key={tabName}
-                    onClick={() => { this.handleChangeTab(tabNumber); }}
-                    type={'button'}
-                >
-                    {tabName}
-                </button>
+                    label={tabName}
+                    styleType={BUTTON_STYLE_TYPE_INLINE}
+                />
             );
         });
 
@@ -338,9 +341,9 @@ class DashboardView extends React.Component {
                 </main>
                 {this.renderTabs()}
                 <AddTransaction
-                    isAddingTransaction={isAddingTransaction}
                     handleCancel={this.toggleAddingTransaction}
                     handleSubmit={this.addTransaction}
+                    isAddingTransaction={isAddingTransaction}
                 />
                 <FAB handleClick={this.toggleAddingTransaction} />
                 {

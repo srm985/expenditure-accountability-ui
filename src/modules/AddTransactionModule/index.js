@@ -136,13 +136,13 @@ class AddTransactionModule extends React.Component {
 
         return (
             <Modal
+                handleClickCTAPrimary={this.handleSubmit}
                 handleClickCTASecondary={this.handleCancel}
                 handleClose={this.handleCancel}
                 isShown={isAddingTransaction}
                 key={modalKey}
                 labelCTAPrimary={'Submit'}
                 labelCTASecondary={'Cancel'}
-                handleClickCTAPrimary={this.handleSubmit}
             >
                 <h2 className={'mb--2'}>
                     {'Add Transaction'}

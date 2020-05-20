@@ -2,9 +2,9 @@
 
 .HeaderComponent {
     position: fixed;
-    z-index: $z-index-header;
     top: 0;
     left: 0;
+    z-index: $z-index-header;
 
     display: flex;
     align-items: center;
@@ -15,13 +15,15 @@
     height: $header-height;
     padding: 0 $padding-large;
 
-    transition: background-color 0.75s ease-in-out, color 0.75s ease-in-out;
-
     color: $color-white;
+
     background-color: $color-blue;
+
+    transition: background-color 0.75s ease-in-out, color 0.75s ease-in-out;
 
     &--scrolled {
         color: $color-gray-dark;
+
         background-color: $color-red;
     }
 

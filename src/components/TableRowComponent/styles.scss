@@ -11,10 +11,11 @@
     border-top: solid 1px $color-gray-dark;
 
     &__cell {
-        font-size: 14px;
 
         box-sizing: border-box;
         width: 25%;
+
+        font-size: 14px;
 
         text-align: right;
 
@@ -42,9 +43,9 @@
             width: 20px;
             height: 20px;
 
-            cursor: pointer;
-
             color: $color-blue;
+
+            cursor: pointer;
         }
     }
 }

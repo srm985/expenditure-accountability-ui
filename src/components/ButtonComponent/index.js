@@ -59,6 +59,7 @@ const ButtonComponent = (props) => {
         <button
             className={buttonClassNames}
             onClick={handleClick}
+            // eslint-disable-next-line react/button-has-type
             type={type}
         >
             {buttonLabel}

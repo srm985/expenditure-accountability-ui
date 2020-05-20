@@ -4,7 +4,6 @@ import save from './save.svg';
 import share from './share.svg';
 import splitwise from './splitwise.svg';
 
-
 export {
     cart,
     personal,
