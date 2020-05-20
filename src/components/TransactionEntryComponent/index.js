@@ -332,43 +332,42 @@ class TransactionEntryComponent extends React.Component {
                         >
                             <Input
                                 className={'mb--2'}
-                                defaultValue={transactionTitle}
                                 handleChange={this.handleChange}
                                 isRequired
                                 label={'Title'}
                                 name={'transactionTitle'}
                                 placeholder={'transaction title'}
+                                value={transactionTitle}
                             />
                             <Input
                                 className={'mb--2'}
-                                defaultValue={transactionDescription}
                                 handleChange={this.handleChange}
                                 label={'Description'}
                                 name={'transactionDescription'}
                                 placeholder={'transaction description'}
+                                value={transactionDescription}
                             />
                             <Input
                                 className={'mb--2'}
-                                defaultValue={transactionDate}
                                 handleChange={this.handleChange}
                                 isRequired
                                 label={'Date'}
                                 name={'transactionDate'}
                                 placeholder={'transaction date'}
                                 type={INPUT_TYPE_DATE}
+                                value={transactionDate}
                             />
                             <Select
                                 className={'mb--2'}
-                                defaultValue={transactionType}
                                 handleChange={this.handleChange}
                                 isRequired
                                 label={'Type'}
                                 name={'transactionType'}
                                 options={transactionTypeOptions}
+                                value={transactionType}
                             />
                             <Input
                                 className={'mb--4'}
-                                defaultValue={transactionTotalCost}
                                 handleChange={this.handleChange}
                                 isRequired
                                 label={'Total Cost'}

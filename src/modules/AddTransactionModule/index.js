@@ -1,3 +1,4 @@
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -24,11 +25,11 @@ class AddTransactionModule extends React.Component {
 
         this.state = {
             modalKey: Math.random(),
-            transactionDate: '',
+            transactionDate: moment().format('YYYY-MM-DD'),
             transactionDescription: '',
             transactionTitle: '',
             transactionTotalCost: '',
-            transactionType: ''
+            transactionType: TRANSACTION_TYPE_PERSONAL
         };
     }
 
@@ -119,9 +120,14 @@ class AddTransactionModule extends React.Component {
             },
             state: {
                 modalKey,
-                transactionTotalCost
+                transactionDate,
+                transactionDescription,
+                transactionTitle,
+                transactionTotalCost,
+                transactionType
             }
         } = this;
+        console.log(this.state);
 
         const transactionTypeOptions = TRANSACTION_TYPES.map((transactionTypeOption) => {
             const {
@@ -154,6 +160,7 @@ class AddTransactionModule extends React.Component {
                     label={'Title'}
                     name={'transactionTitle'}
                     placeholder={'transaction title'}
+                    value={transactionTitle}
                 />
                 <Input
                     className={'mb--2'}
@@ -161,6 +168,7 @@ class AddTransactionModule extends React.Component {
                     label={'Description'}
                     name={'transactionDescription'}
                     placeholder={'transaction description'}
+                    value={transactionDescription}
                 />
                 <Input
                     className={'mb--2'}
@@ -170,15 +178,16 @@ class AddTransactionModule extends React.Component {
                     name={'transactionDate'}
                     placeholder={'transaction date'}
                     type={INPUT_TYPE_DATE}
+                    value={transactionDate}
                 />
                 <Select
                     className={'mb--2'}
-                    defaultValue={TRANSACTION_TYPE_PERSONAL}
                     handleChange={this.handleChange}
                     isRequired
                     label={'Type'}
                     name={'transactionType'}
                     options={transactionTypeOptions}
+                    value={transactionType}
                 />
                 <Input
                     className={'mb--4'}

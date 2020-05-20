@@ -13,7 +13,6 @@ import './styles.scss';
 const InputComponent = (props) => {
     const {
         className,
-        defaultValue,
         handleChange,
         isRequired,
         label,
@@ -55,7 +54,6 @@ const InputComponent = (props) => {
             }
             <input
                 className={`${displayName}__input`}
-                defaultValue={defaultValue}
                 id={name}
                 name={name}
                 onChange={handleChange}
@@ -72,10 +70,6 @@ InputComponent.displayName = 'InputComponent';
 
 InputComponent.propTypes = {
     className: PropTypes.string,
-    defaultValue: PropTypes.oneOfType([
-        PropTypes.number,
-        PropTypes.string
-    ]),
     handleChange: PropTypes.func,
     isRequired: PropTypes.bool,
     label: PropTypes.string,
@@ -90,7 +84,6 @@ InputComponent.propTypes = {
 
 InputComponent.defaultProps = {
     className: '',
-    defaultValue: '',
     handleChange: () => { },
     isRequired: false,
     label: '',

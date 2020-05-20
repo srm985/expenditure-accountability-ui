@@ -2,13 +2,10 @@
 
 .InputComponent {
     display: inline-block;
-
     width: 100%;
 
     &__label {
-
         display: inline-block;
-
         margin-bottom: #{$planck-length / 2};
 
         font-size: $font-size-small;
@@ -24,6 +21,8 @@
         height: 30px;
         padding-right: $planck-length;
         padding-left: $planck-length;
+
+        font-family: $font-stack;
 
         border: solid 1px $color-gray-dark;
         border-radius: $border-radius-default;

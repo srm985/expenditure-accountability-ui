@@ -8,12 +8,12 @@ import './styles.scss';
 const SelectComponent = (props) => {
     const {
         className,
-        defaultValue,
         handleChange,
         isRequired,
         label,
         name,
-        options
+        options,
+        value
     } = props;
 
     const {
@@ -64,11 +64,11 @@ const SelectComponent = (props) => {
             }
             <select
                 className={`${displayName}__select`}
-                defaultValue={defaultValue}
                 id={name}
                 name={name}
                 onChange={handleChange}
                 required={isRequired}
+                value={value}
             >
                 {generatedOptions}
             </select>
@@ -80,10 +80,6 @@ SelectComponent.displayName = 'SelectComponent';
 
 SelectComponent.propTypes = {
     className: PropTypes.string,
-    defaultValue: PropTypes.oneOfType([
-        PropTypes.number,
-        PropTypes.string
-    ]),
     handleChange: PropTypes.func,
     isRequired: PropTypes.bool,
     label: PropTypes.string,
@@ -97,16 +93,20 @@ SelectComponent.propTypes = {
             PropTypes.number,
             PropTypes.string
         ])
-    }))
+    })),
+    value: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string
+    ])
 };
 
 SelectComponent.defaultProps = {
     className: '',
-    defaultValue: '',
     handleChange: () => { },
     isRequired: false,
     label: '',
-    options: []
+    options: [],
+    value: ''
 };
 
 export default SelectComponent;
