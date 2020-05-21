@@ -9,6 +9,7 @@ const SelectComponent = (props) => {
     const {
         className,
         handleChange,
+        id,
         isRequired,
         label,
         name,
@@ -64,7 +65,7 @@ const SelectComponent = (props) => {
             }
             <select
                 className={`${displayName}__select`}
-                id={name}
+                id={id || name}
                 name={name}
                 onChange={handleChange}
                 required={isRequired}
@@ -81,6 +82,7 @@ SelectComponent.displayName = 'SelectComponent';
 SelectComponent.propTypes = {
     className: PropTypes.string,
     handleChange: PropTypes.func,
+    id: PropTypes.string,
     isRequired: PropTypes.bool,
     label: PropTypes.string,
     name: PropTypes.string.isRequired,
@@ -103,6 +105,7 @@ SelectComponent.propTypes = {
 SelectComponent.defaultProps = {
     className: '',
     handleChange: () => { },
+    id: '',
     isRequired: false,
     label: '',
     options: [],

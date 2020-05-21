@@ -6,6 +6,7 @@ import {
     Switch
 } from 'react-router-dom';
 
+import BulkEntry from './views/BulkEntryView';
 import Dashboard from './views/DashboardView';
 import Enroll from './views/EnrollView';
 import Login from './views/LoginView';
@@ -52,6 +53,11 @@ const App = () => (
                     component={Splitwise}
                     onEnter={requireAuthentication}
                     path={'/splitwise'}
+                />
+                <AuthenticatedRoute
+                    component={BulkEntry}
+                    onEnter={requireAuthentication}
+                    path={'/bulk-entry'}
                 />
                 <Route
                     component={NotFound}

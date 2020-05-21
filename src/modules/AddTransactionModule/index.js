@@ -2,22 +2,26 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import {
-    TRANSACTION_TYPES,
-    TRANSACTION_TYPE_LABELS,
-    TRANSACTION_TYPE_PERSONAL
-} from '../../constants';
-
+import Button from '../../components/ButtonComponent';
 import Input from '../../components/InputComponent';
 import Modal from '../../components/ModalComponent';
 import Select from '../../components/SelectComponent';
 
+import {
+    BUTTON_STYLE_TYPE_INLINE
+} from '../../components/ButtonComponent/config';
 import {
     INPUT_TYPE_DATE,
     INPUT_TYPE_TEL
 } from '../../components/InputComponent/config';
 
 import currency from '../../utils/currency';
+
+import {
+    TRANSACTION_TYPES,
+    TRANSACTION_TYPE_LABELS,
+    TRANSACTION_TYPE_PERSONAL
+} from '../../constants';
 
 class AddTransactionModule extends React.Component {
     constructor(props) {
@@ -127,7 +131,6 @@ class AddTransactionModule extends React.Component {
                 transactionType
             }
         } = this;
-        console.log(this.state);
 
         const transactionTypeOptions = TRANSACTION_TYPES.map((transactionTypeOption) => {
             const {
@@ -190,7 +193,7 @@ class AddTransactionModule extends React.Component {
                     value={transactionType}
                 />
                 <Input
-                    className={'mb--4'}
+                    className={'mb--2'}
                     handleChange={this.handleChange}
                     isRequired
                     label={'Total Cost'}
@@ -198,6 +201,14 @@ class AddTransactionModule extends React.Component {
                     placeholder={'transaction total cost'}
                     type={INPUT_TYPE_TEL}
                     value={transactionTotalCost}
+                />
+                <Button
+                    className={'mb--4'}
+                    href={'/bulk-entry'}
+                    isAlignedRight
+                    isInlineBlock
+                    label={'Add bulk transactions'}
+                    styleType={BUTTON_STYLE_TYPE_INLINE}
                 />
             </Modal>
         );

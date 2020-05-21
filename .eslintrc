@@ -180,6 +180,21 @@
                         "group": "parent",
                         "pattern": "../../assets/**/*",
                         "position": "after"
+                    },
+                    {
+                        "group": "parent",
+                        "pattern": "./constants",
+                        "position": "after"
+                    },
+                    {
+                        "group": "parent",
+                        "pattern": "../constants",
+                        "position": "after"
+                    },
+                    {
+                        "group": "parent",
+                        "pattern": "../../constants",
+                        "position": "after"
                     }
                 ]
             }

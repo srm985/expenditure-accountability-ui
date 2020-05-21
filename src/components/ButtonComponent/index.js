@@ -19,28 +19,36 @@ const ButtonComponent = (props) => {
         className,
         handleClick,
         href,
+        isAlignedRight,
         isFullWidth,
+        isInlineBlock,
         isWarning,
         label,
         styleType,
         type
     } = props;
 
+    const {
+        displayName
+    } = ButtonComponent;
+
     const buttonLabel = (
         <span>{label}</span>
     );
 
     const buttonClassNames = classNames(
-        ButtonComponent.displayName,
+        displayName,
         className,
         {
-            [`${ButtonComponent.displayName}--full-width`]: isFullWidth && (styleType === BUTTON_STYLE_TYPE_PRIMARY || styleType === BUTTON_STYLE_TYPE_SECONDARY),
-            [`${ButtonComponent.displayName}--inline`]: styleType === BUTTON_STYLE_TYPE_INLINE,
-            [`${ButtonComponent.displayName}--primary`]: styleType === BUTTON_STYLE_TYPE_PRIMARY,
-            [`${ButtonComponent.displayName}--secondary`]: styleType === BUTTON_STYLE_TYPE_SECONDARY,
-            [`${ButtonComponent.displayName}--inline-warning`]: styleType === BUTTON_STYLE_TYPE_INLINE && isWarning,
-            [`${ButtonComponent.displayName}--primary-warning`]: styleType === BUTTON_STYLE_TYPE_PRIMARY && isWarning,
-            [`${ButtonComponent.displayName}--secondary-warning`]: styleType === BUTTON_STYLE_TYPE_SECONDARY && isWarning
+            [`${displayName}--aligned-right`]: isAlignedRight,
+            [`${displayName}--full-width`]: isFullWidth && (styleType === BUTTON_STYLE_TYPE_PRIMARY || styleType === BUTTON_STYLE_TYPE_SECONDARY),
+            [`${displayName}--inline-block`]: styleType === BUTTON_STYLE_TYPE_INLINE && isInlineBlock,
+            [`${displayName}--inline-warning`]: styleType === BUTTON_STYLE_TYPE_INLINE && isWarning,
+            [`${displayName}--inline`]: styleType === BUTTON_STYLE_TYPE_INLINE,
+            [`${displayName}--primary-warning`]: styleType === BUTTON_STYLE_TYPE_PRIMARY && isWarning,
+            [`${displayName}--primary`]: styleType === BUTTON_STYLE_TYPE_PRIMARY,
+            [`${displayName}--secondary-warning`]: styleType === BUTTON_STYLE_TYPE_SECONDARY && isWarning,
+            [`${displayName}--secondary`]: styleType === BUTTON_STYLE_TYPE_SECONDARY
         }
     );
 
@@ -85,7 +93,9 @@ ButtonComponent.propTypes = {
     className: PropTypes.string,
     handleClick: PropTypes.func,
     href: PropTypes.string,
+    isAlignedRight: PropTypes.bool,
     isFullWidth: PropTypes.bool,
+    isInlineBlock: PropTypes.bool,
     isWarning: PropTypes.bool,
     label: PropTypes.string,
     styleType: PropTypes.oneOf(BUTTON_STYLE_TYPES),
@@ -96,7 +106,9 @@ ButtonComponent.defaultProps = {
     className: '',
     handleClick: () => { },
     href: '',
+    isAlignedRight: false,
     isFullWidth: false,
+    isInlineBlock: false,
     isWarning: false,
     label: '',
     styleType: BUTTON_STYLE_TYPE_PRIMARY,

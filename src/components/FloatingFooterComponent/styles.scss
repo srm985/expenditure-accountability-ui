@@ -1,0 +1,17 @@
+@import '../../styles/constants';
+
+.FloatingFooterComponent {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 100%;
+    padding: #{$planck-length * 2};
+
+    background-color: $color-gray-light;
+    box-shadow: 0 -5px 5px $color-gray-dark;
+    opacity: 0.9;
+}

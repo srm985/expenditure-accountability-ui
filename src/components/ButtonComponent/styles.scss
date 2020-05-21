@@ -1,11 +1,9 @@
 @import '../../styles/constants';
 
 %button {
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     box-sizing: border-box;
     min-width: 120px;
     height: 40px;
@@ -14,7 +12,6 @@
     font-size: 16px;
     line-height: 16px;
     text-transform: uppercase;
-
     text-decoration: none;
 
     border-radius: 5px;
@@ -25,7 +22,6 @@
 
     border: none;
     outline: none;
-
     cursor: pointer;
 
     transition: background-color ease-in-out 0.2s, color ease-in-out 0.2s;
@@ -62,16 +58,18 @@
     }
 
     &--inline {
-
         margin: 0;
         padding: 0;
 
         color: $color-blue;
         font-size: inherit;
-
         text-decoration: underline;
 
         background-color: transparent;
+    }
+
+    &--inline-block {
+        display: inline-block;
     }
 
     &--primary-warning {
@@ -107,5 +105,9 @@
 
     &--full-width {
         width: 100%;
+    }
+
+    &--aligned-right {
+        float: right;
     }
 }

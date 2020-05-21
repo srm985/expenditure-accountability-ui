@@ -14,6 +14,7 @@ const InputComponent = (props) => {
     const {
         className,
         handleChange,
+        id,
         isRequired,
         label,
         name,
@@ -54,7 +55,7 @@ const InputComponent = (props) => {
             }
             <input
                 className={`${displayName}__input`}
-                id={name}
+                id={id || name}
                 name={name}
                 onChange={handleChange}
                 placeholder={placeholder}
@@ -71,6 +72,7 @@ InputComponent.displayName = 'InputComponent';
 InputComponent.propTypes = {
     className: PropTypes.string,
     handleChange: PropTypes.func,
+    id: PropTypes.string,
     isRequired: PropTypes.bool,
     label: PropTypes.string,
     name: PropTypes.string.isRequired,
@@ -85,6 +87,7 @@ InputComponent.propTypes = {
 InputComponent.defaultProps = {
     className: '',
     handleChange: () => { },
+    id: '',
     isRequired: false,
     label: '',
     placeholder: '',

@@ -2,13 +2,6 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import {
-    TRANSACTION_TYPES,
-    TRANSACTION_TYPE_GROCERY,
-    TRANSACTION_TYPE_LABELS,
-    TRANSACTION_TYPE_PERSONAL,
-    TRANSACTION_TYPE_SHARED
-} from '../../constants';
 import Button from '../ButtonComponent';
 import Icon from '../IconComponent';
 import Input from '../InputComponent';
@@ -33,6 +26,14 @@ import {
     share,
     splitwise
 } from '../../assets/icons';
+
+import {
+    TRANSACTION_TYPES,
+    TRANSACTION_TYPE_GROCERY,
+    TRANSACTION_TYPE_LABELS,
+    TRANSACTION_TYPE_PERSONAL,
+    TRANSACTION_TYPE_SHARED
+} from '../../constants';
 
 import './styles.scss';
 
